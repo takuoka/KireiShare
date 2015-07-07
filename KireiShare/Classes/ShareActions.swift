@@ -61,10 +61,8 @@ class ShareActions {
                 composeVC.completionHandler = { (result:SLComposeViewControllerResult) -> () in
                     switch (result) {
                     case SLComposeViewControllerResult.Done:
-                        println("SLComposeViewControllerResult.Done")
                         completion!()
                     case SLComposeViewControllerResult.Cancelled:
-                        println("SLComposeViewControllerResult.Cancelled")
                         completion!()
                     }
                 }

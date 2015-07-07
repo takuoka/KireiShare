@@ -102,19 +102,22 @@ public class KireiShareView : UIViewController, UIGestureRecognizerDelegate {
     }
     
     
-    
+    private func imageNamed(name:String)->UIImage? {
+        return UIImage(named: name, inBundle: NSBundle(forClass: KireiShareView.self), compatibleWithTraitCollection: nil)
+//        return UIImage(named: name)
+    }
     
     
     private func viewWillShow() {
         addCancelButton {
             self.disappear()
         }
-        addButton(text:otherButtonText, icon:nil) {
+        addButton(text:otherButtonText, icon: imageNamed("other")) {
             ShareActions.openShareView(self, text: self.text, url: self.url, image: self.image) {
                 self.disappear()
             }
         }
-        addButton(text:"Copy Link", icon:nil) {
+        addButton(text:"Copy Link", icon: imageNamed("link")) {
             if self.url != nil {
                 UIPasteboard.generalPasteboard().string = self.url
                 if (UIPasteboard.generalPasteboard().string == self.url) {
@@ -127,12 +130,12 @@ public class KireiShareView : UIViewController, UIGestureRecognizerDelegate {
                 self.disappear()
             }
         }
-        addButton(text:"Facebook", icon:nil) {
+        addButton(text:"Facebook", icon: imageNamed("facebook")) {
             ShareActions.openComposer(self, type: ComposerType.Facebook, text: self.text, url: self.url, image: self.image) {
                 self.disappear()
             }
         }
-        addButton(text:"Twitter", icon:UIImage(named: "twitter")) {
+        addButton(text:"Twitter", icon: imageNamed("twitter")) {
             ShareActions.openComposer(self, type: ComposerType.Twitter, text: self.text, url: self.url, image: self.image) {
                 self.disappear()
             }
@@ -164,7 +167,6 @@ public class KireiShareView : UIViewController, UIGestureRecognizerDelegate {
         )
     }
     func addButton(#text:String, icon:UIImage?, height:CGFloat, bgColor:UIColor, textColor:UIColor, borderColor:UIColor?, onTapFunc:()->()) {
-        println("addButton")
         let btn = UIButton()
         let iconView = UIImageView(image: icon)
         let label = UILabel()
