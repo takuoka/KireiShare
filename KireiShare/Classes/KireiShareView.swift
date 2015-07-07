@@ -29,16 +29,30 @@ public class KireiShareView : UIViewController, UIGestureRecognizerDelegate {
     private let cancelButtonTextColor = UIColor(red: 184/255, green: 184/255, blue: 184/255, alpha: 1)
     private let iconMarginLeft:CGFloat = 9
     private var backgroundAlpha:CGFloat = 0.8
+
+    private let copiedMessageViewHeight:CGFloat = 50
+    private let copiedMessageLabelMarginLeft:CGFloat = 12
+    private let copiedMessageLabelTextColor = UIColor.whiteColor()
+    private let copiedMessageViewColor = UIColor(white: 0.275, alpha: 1)
+    private let copiedMessageFont = UIFont(name: "HiraKakuProN-W3", size: 12)!
+
     private var buttonsHeight:CGFloat {
         get { return maxSize.height - buttons.last!.top }
     }
 
-    
-    public var copyFinishedMessage = "Succeed."
+    public var cancelText = "Cancel"
+    public var copyFinishedMessage = "Copy Succeed."
+    public var copyFaildedMessage = "Copy Failed."
     
     private let backgroundSheet = UIView()
     private let buttonSheet = UIView()
+    private let copiedMessageView = UIView()
+    private let copiedMessageLabel = UILabel()
+    
 
+    
+    
+    
     public init(text:String, url:String?, image:UIImage?) {
         self.text = text
         self.url = url
@@ -55,45 +69,68 @@ public class KireiShareView : UIViewController, UIGestureRecognizerDelegate {
 
         backgroundSheet.frame = maxSize
         backgroundSheet.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(backgroundAlpha)
-        self.view.addSubview(backgroundSheet)
-        
         buttonSheet.frame = maxSize
+        
+        
+        copiedMessageView.frame = CGRect(
+            x: 0,
+            y: maxSize.height - copiedMessageViewHeight,
+            width: maxSize.width,
+            height: copiedMessageViewHeight
+        )
+        copiedMessageView.backgroundColor = copiedMessageViewColor
+        copiedMessageView.hidden = true
+        
+        copiedMessageLabel.font = copiedMessageFont
+        copiedMessageLabel.frame = CGRect(
+            x: copiedMessageLabelMarginLeft, y: 0,
+            width: maxSize.width, height: copiedMessageViewHeight
+        )
+        copiedMessageLabel.textColor = copiedMessageLabelTextColor
+        copiedMessageView.addSubview(copiedMessageLabel)
+
+        
+        self.view.addSubview(backgroundSheet)
         self.view.addSubview(buttonSheet)
 
         let tapGesture = UITapGestureRecognizer(target:self, action:"didTapBackgroundSheet")
         tapGesture.delegate = self
         buttonSheet.userInteractionEnabled = true
         buttonSheet.addGestureRecognizer(tapGesture)
-        
-
-        addCancelButton {
-            self.disappear()
-        }
     }
     
     
+    
+    
+    
     private func viewWillShow() {
-        println("initViews")
-        addButton(text:"その他", icon:nil) {
-            println("そのた")
+        addCancelButton {
+            self.disappear()
+        }
+        addButton(text:"Other", icon:nil) {
             ShareActions.openShareView(self, text: self.text, url: self.url, image: self.image) {
                 self.disappear()
             }
         }
         addButton(text:"Copy Link", icon:nil) {
-            println("こぴ")
             if self.url != nil {
                 UIPasteboard.generalPasteboard().string = self.url
+                if (UIPasteboard.generalPasteboard().string == self.url) {
+                    self.copiedMessageLabel.text = self.copyFinishedMessage
+                }
+                else {
+                    self.copiedMessageLabel.text = self.copyFaildedMessage
+                }
+                self.copiedMessageView.hidden = false
+                self.disappear()
             }
         }
         addButton(text:"Facebook", icon:nil) {
-            println("fb")
             ShareActions.openComposer(self, type: ComposerType.Facebook, text: self.text, url: self.url, image: self.image) {
                 self.disappear()
             }
         }
         addButton(text:"Twitter", icon:UIImage(named: "twitter")) {
-            println("twiた")
             ShareActions.openComposer(self, type: ComposerType.Twitter, text: self.text, url: self.url, image: self.image) {
                 self.disappear()
             }
@@ -102,11 +139,9 @@ public class KireiShareView : UIViewController, UIGestureRecognizerDelegate {
     
     
     
-    
-    
     private func addCancelButton(onTapFunc:()->()) {
         addButton(
-            text: "キャンセル",
+            text: cancelText,
             icon: nil,
             height: cancelButtonHeight,
             bgColor: cancelButtonColor,
@@ -182,7 +217,7 @@ public class KireiShareView : UIViewController, UIGestureRecognizerDelegate {
     
     public func show() {
         if UIApplication.sharedApplication().delegate == nil{
-            println("Window is not found.")
+            println("window is not found.")
             return
         }
         let window:UIWindow = UIApplication.sharedApplication().delegate!.window!!
@@ -191,6 +226,7 @@ public class KireiShareView : UIViewController, UIGestureRecognizerDelegate {
         buttonSheet.top = buttonSheet.top + buttonsHeight
         backgroundSheet.alpha = 0
         
+        window.addSubview(copiedMessageView)
         window.addSubview(self.view)
         
         UIView.animateWithDuration(0.2, delay: 0, options: UIViewAnimationOptions.CurveEaseInOut, animations: { () -> Void in
@@ -203,11 +239,24 @@ public class KireiShareView : UIViewController, UIGestureRecognizerDelegate {
     
     func disappear() {
         UIView.animateWithDuration(0.2, delay: 0, options: UIViewAnimationOptions.CurveEaseInOut, animations: { () -> Void in
-            self.buttonSheet.top = self.buttonSheet.top + self.buttonsHeight
             self.backgroundSheet.alpha = 0
+            self.buttonSheet.top = self.buttonSheet.top + self.buttonsHeight
         },
         completion: { _ in
             self.view.removeFromSuperview()
+            if self.copiedMessageView.hidden == false {
+                NSTimer.schedule(delay: 1) { timer in
+                    UIView.animateWithDuration(0.2, delay: 0, options: UIViewAnimationOptions.CurveEaseInOut, animations: { () -> Void in
+                        self.copiedMessageView.alpha = 0
+                    },
+                    completion: { _ in
+                        self.copiedMessageView.removeFromSuperview()
+                    })
+                }
+            }
+            else {
+                self.copiedMessageView.removeFromSuperview()
+            }
         })
     }
 }

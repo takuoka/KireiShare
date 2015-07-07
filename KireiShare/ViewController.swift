@@ -37,6 +37,7 @@ class ViewController: UIViewController {
             image: nil
         )
         shareView.copyFinishedMessage = "コピーしました。"
+        shareView.cancelText = "キャンセル"
         shareView.show()
     }
 }
