@@ -102,15 +102,7 @@ Pod::Spec.new do |s|
   #  non-essential files like tests, examples and documentation.
   #
 
-  # s.resource  = "icon.png"
-  # s.resources = "Resources/*.png"
-  # s.resource = 'KireiShare/Classes/Images.xcassets'
   s.resources = 'KireiShare/Classes/Images.xcassets'
-  # s.resource_bundle = { 'KireiShareView' => 'KireiShare/Classes/Images.xcassets/*/*.png' }
-  # s.resources = 'KireiShare/Classes/Images.xcassets/*/*.png'
-  # s.resources = 'KireiShare/Classes/Images.xcassets/*/*.json'
-  # s.resources = 'KireiShare/Classes/Images.xcassets/*.imageset'
-
   # s.preserve_paths = "FilesToSave", "MoreFilesToSave"
 
 

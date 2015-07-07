@@ -104,7 +104,6 @@ public class KireiShareView : UIViewController, UIGestureRecognizerDelegate {
     
     private func imageNamed(name:String)->UIImage? {
         return UIImage(named: name, inBundle: NSBundle(forClass: KireiShareView.self), compatibleWithTraitCollection: nil)
-//        return UIImage(named: name)
     }
     
     
