@@ -12,7 +12,7 @@
 import UIKit
 
 
-public class KireiShareView : UIViewController {
+public class KireiShareView : UIViewController, UIGestureRecognizerDelegate {
 
     private let text:String!
     private let url:String?
@@ -28,7 +28,12 @@ public class KireiShareView : UIViewController {
     private let cancelButtonColor = UIColor(red: 0.972549, green: 0.972549, blue: 0.972549, alpha: 1)
     private let cancelButtonTextColor = UIColor(red: 184/255, green: 184/255, blue: 184/255, alpha: 1)
     private let iconMarginLeft:CGFloat = 9
+    private var backgroundAlpha:CGFloat = 0.8
+    private var buttonsHeight:CGFloat {
+        get { return maxSize.height - buttons.last!.top }
+    }
 
+    
     public var copyFinishedMessage = "Succeed."
     
     private let backgroundSheet = UIView()
@@ -45,15 +50,21 @@ public class KireiShareView : UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func setup() {
+    private func setup() {
         maxSize = UIScreen.mainScreen().bounds
 
         backgroundSheet.frame = maxSize
-        backgroundSheet.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.2)
+        backgroundSheet.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(backgroundAlpha)
         self.view.addSubview(backgroundSheet)
         
         buttonSheet.frame = maxSize
         self.view.addSubview(buttonSheet)
+
+        let tapGesture = UITapGestureRecognizer(target:self, action:"didTapBackgroundSheet")
+        tapGesture.delegate = self
+        buttonSheet.userInteractionEnabled = true
+        buttonSheet.addGestureRecognizer(tapGesture)
+        
 
         addCancelButton {
             self.disappear()
@@ -61,7 +72,7 @@ public class KireiShareView : UIViewController {
     }
     
     
-    func initViews() {
+    private func viewWillShow() {
         println("initViews")
         addButton(text:"その他", icon:nil) {
             println("そのた")
@@ -91,7 +102,9 @@ public class KireiShareView : UIViewController {
     
     
     
-    func addCancelButton(onTapFunc:()->()) {
+    
+    
+    private func addCancelButton(onTapFunc:()->()) {
         addButton(
             text: "キャンセル",
             icon: nil,
@@ -141,7 +154,7 @@ public class KireiShareView : UIViewController {
                 border.frame = CGRect(x: 0, y: 0, width: maxSize.width, height: 1)
                 border.bottom = buttons.last!.top
                 border.backgroundColor = borderColor!
-                self.view.addSubview(border)
+                buttonSheet.addSubview(border)
                 btn.bottom = border.top
             }
         }
@@ -159,6 +172,12 @@ public class KireiShareView : UIViewController {
         buttonActions[btn.tag]()
     }
     
+    func didTapBackgroundSheet() {
+        disappear()
+    }
+    
+    
+    
     
     
     public func show() {
@@ -167,14 +186,29 @@ public class KireiShareView : UIViewController {
             return
         }
         let window:UIWindow = UIApplication.sharedApplication().delegate!.window!!
+        viewWillShow()
         
-        initViews()
+        buttonSheet.top = buttonSheet.top + buttonsHeight
+        backgroundSheet.alpha = 0
         
         window.addSubview(self.view)
+        
+        UIView.animateWithDuration(0.2, delay: 0, options: UIViewAnimationOptions.CurveEaseInOut, animations: { () -> Void in
+            self.backgroundSheet.alpha = 1
+            self.buttonSheet.top = self.buttonSheet.top - self.buttonsHeight
+        },
+        completion: { _ in
+        })
     }
     
     func disappear() {
-        self.view.removeFromSuperview()
+        UIView.animateWithDuration(0.2, delay: 0, options: UIViewAnimationOptions.CurveEaseInOut, animations: { () -> Void in
+            self.buttonSheet.top = self.buttonSheet.top + self.buttonsHeight
+            self.backgroundSheet.alpha = 0
+        },
+        completion: { _ in
+            self.view.removeFromSuperview()
+        })
     }
 }
 
