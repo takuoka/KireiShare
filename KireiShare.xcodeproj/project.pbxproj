@@ -1,0 +1,426 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		B050BC171B4B63AA00CCA6AC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B050BC161B4B63AA00CCA6AC /* AppDelegate.swift */; };
+		B050BC191B4B63AA00CCA6AC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B050BC181B4B63AA00CCA6AC /* ViewController.swift */; };
+		B050BC1C1B4B63AA00CCA6AC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B050BC1A1B4B63AA00CCA6AC /* Main.storyboard */; };
+		B050BC1E1B4B63AA00CCA6AC /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B050BC1D1B4B63AA00CCA6AC /* Images.xcassets */; };
+		B050BC211B4B63AA00CCA6AC /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = B050BC1F1B4B63AA00CCA6AC /* LaunchScreen.xib */; };
+		B050BC2D1B4B63AA00CCA6AC /* KireiShareTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B050BC2C1B4B63AA00CCA6AC /* KireiShareTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		B050BC271B4B63AA00CCA6AC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B050BC091B4B63AA00CCA6AC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B050BC101B4B63AA00CCA6AC;
+			remoteInfo = KireiShare;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		B050BC111B4B63AA00CCA6AC /* KireiShare.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KireiShare.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B050BC151B4B63AA00CCA6AC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B050BC161B4B63AA00CCA6AC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		B050BC181B4B63AA00CCA6AC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		B050BC1B1B4B63AA00CCA6AC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		B050BC1D1B4B63AA00CCA6AC /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		B050BC201B4B63AA00CCA6AC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		B050BC261B4B63AA00CCA6AC /* KireiShareTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KireiShareTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B050BC2B1B4B63AA00CCA6AC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B050BC2C1B4B63AA00CCA6AC /* KireiShareTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KireiShareTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		B050BC0E1B4B63AA00CCA6AC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B050BC231B4B63AA00CCA6AC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		B050BC081B4B63AA00CCA6AC = {
+			isa = PBXGroup;
+			children = (
+				B050BC131B4B63AA00CCA6AC /* KireiShare */,
+				B050BC291B4B63AA00CCA6AC /* KireiShareTests */,
+				B050BC121B4B63AA00CCA6AC /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		B050BC121B4B63AA00CCA6AC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B050BC111B4B63AA00CCA6AC /* KireiShare.app */,
+				B050BC261B4B63AA00CCA6AC /* KireiShareTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B050BC131B4B63AA00CCA6AC /* KireiShare */ = {
+			isa = PBXGroup;
+			children = (
+				B050BC161B4B63AA00CCA6AC /* AppDelegate.swift */,
+				B050BC181B4B63AA00CCA6AC /* ViewController.swift */,
+				B050BC1A1B4B63AA00CCA6AC /* Main.storyboard */,
+				B050BC1D1B4B63AA00CCA6AC /* Images.xcassets */,
+				B050BC1F1B4B63AA00CCA6AC /* LaunchScreen.xib */,
+				B050BC141B4B63AA00CCA6AC /* Supporting Files */,
+			);
+			path = KireiShare;
+			sourceTree = "<group>";
+		};
+		B050BC141B4B63AA00CCA6AC /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				B050BC151B4B63AA00CCA6AC /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		B050BC291B4B63AA00CCA6AC /* KireiShareTests */ = {
+			isa = PBXGroup;
+			children = (
+				B050BC2C1B4B63AA00CCA6AC /* KireiShareTests.swift */,
+				B050BC2A1B4B63AA00CCA6AC /* Supporting Files */,
+			);
+			path = KireiShareTests;
+			sourceTree = "<group>";
+		};
+		B050BC2A1B4B63AA00CCA6AC /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				B050BC2B1B4B63AA00CCA6AC /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		B050BC101B4B63AA00CCA6AC /* KireiShare */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B050BC301B4B63AA00CCA6AC /* Build configuration list for PBXNativeTarget "KireiShare" */;
+			buildPhases = (
+				B050BC0D1B4B63AA00CCA6AC /* Sources */,
+				B050BC0E1B4B63AA00CCA6AC /* Frameworks */,
+				B050BC0F1B4B63AA00CCA6AC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = KireiShare;
+			productName = KireiShare;
+			productReference = B050BC111B4B63AA00CCA6AC /* KireiShare.app */;
+			productType = "com.apple.product-type.application";
+		};
+		B050BC251B4B63AA00CCA6AC /* KireiShareTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B050BC331B4B63AA00CCA6AC /* Build configuration list for PBXNativeTarget "KireiShareTests" */;
+			buildPhases = (
+				B050BC221B4B63AA00CCA6AC /* Sources */,
+				B050BC231B4B63AA00CCA6AC /* Frameworks */,
+				B050BC241B4B63AA00CCA6AC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B050BC281B4B63AA00CCA6AC /* PBXTargetDependency */,
+			);
+			name = KireiShareTests;
+			productName = KireiShareTests;
+			productReference = B050BC261B4B63AA00CCA6AC /* KireiShareTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		B050BC091B4B63AA00CCA6AC /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0640;
+				ORGANIZATIONNAME = Uniface;
+				TargetAttributes = {
+					B050BC101B4B63AA00CCA6AC = {
+						CreatedOnToolsVersion = 6.4;
+					};
+					B050BC251B4B63AA00CCA6AC = {
+						CreatedOnToolsVersion = 6.4;
+						TestTargetID = B050BC101B4B63AA00CCA6AC;
+					};
+				};
+			};
+			buildConfigurationList = B050BC0C1B4B63AA00CCA6AC /* Build configuration list for PBXProject "KireiShare" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = B050BC081B4B63AA00CCA6AC;
+			productRefGroup = B050BC121B4B63AA00CCA6AC /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				B050BC101B4B63AA00CCA6AC /* KireiShare */,
+				B050BC251B4B63AA00CCA6AC /* KireiShareTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		B050BC0F1B4B63AA00CCA6AC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B050BC1C1B4B63AA00CCA6AC /* Main.storyboard in Resources */,
+				B050BC211B4B63AA00CCA6AC /* LaunchScreen.xib in Resources */,
+				B050BC1E1B4B63AA00CCA6AC /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B050BC241B4B63AA00CCA6AC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		B050BC0D1B4B63AA00CCA6AC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B050BC191B4B63AA00CCA6AC /* ViewController.swift in Sources */,
+				B050BC171B4B63AA00CCA6AC /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B050BC221B4B63AA00CCA6AC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B050BC2D1B4B63AA00CCA6AC /* KireiShareTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		B050BC281B4B63AA00CCA6AC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B050BC101B4B63AA00CCA6AC /* KireiShare */;
+			targetProxy = B050BC271B4B63AA00CCA6AC /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		B050BC1A1B4B63AA00CCA6AC /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B050BC1B1B4B63AA00CCA6AC /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		B050BC1F1B4B63AA00CCA6AC /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B050BC201B4B63AA00CCA6AC /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		B050BC2E1B4B63AA00CCA6AC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		B050BC2F1B4B63AA00CCA6AC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		B050BC311B4B63AA00CCA6AC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = KireiShare/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		B050BC321B4B63AA00CCA6AC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = KireiShare/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		B050BC341B4B63AA00CCA6AC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = KireiShareTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/KireiShare.app/KireiShare";
+			};
+			name = Debug;
+		};
+		B050BC351B4B63AA00CCA6AC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = KireiShareTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/KireiShare.app/KireiShare";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		B050BC0C1B4B63AA00CCA6AC /* Build configuration list for PBXProject "KireiShare" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B050BC2E1B4B63AA00CCA6AC /* Debug */,
+				B050BC2F1B4B63AA00CCA6AC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B050BC301B4B63AA00CCA6AC /* Build configuration list for PBXNativeTarget "KireiShare" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B050BC311B4B63AA00CCA6AC /* Debug */,
+				B050BC321B4B63AA00CCA6AC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		B050BC331B4B63AA00CCA6AC /* Build configuration list for PBXNativeTarget "KireiShareTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B050BC341B4B63AA00CCA6AC /* Debug */,
+				B050BC351B4B63AA00CCA6AC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = B050BC091B4B63AA00CCA6AC /* Project object */;
+}
