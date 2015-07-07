@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Social
 
 class ViewController: UIViewController {
 
@@ -35,8 +36,8 @@ class ViewController: UIViewController {
             url  : "http://fjie.com",
             image: UIImage()
         )
+
         shareView.show()
     }
-
 }
 

@@ -16,6 +16,8 @@
 		B050BC381B4B63E200CCA6AC /* UIViewEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = B050BC371B4B63E200CCA6AC /* UIViewEx.swift */; };
 		B050BC3A1B4B640D00CCA6AC /* KireiShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B050BC391B4B640D00CCA6AC /* KireiShareView.swift */; };
 		B050BC3C1B4B6B0800CCA6AC /* NSTimerEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = B050BC3B1B4B6B0800CCA6AC /* NSTimerEx.swift */; };
+		B0D5659A1B4B942E00450137 /* ShareActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0D565991B4B942E00450137 /* ShareActions.swift */; };
+		B0D5659C1B4B944C00450137 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0D5659B1B4B944C00450137 /* Social.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +44,8 @@
 		B050BC371B4B63E200CCA6AC /* UIViewEx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewEx.swift; sourceTree = "<group>"; };
 		B050BC391B4B640D00CCA6AC /* KireiShareView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KireiShareView.swift; sourceTree = "<group>"; };
 		B050BC3B1B4B6B0800CCA6AC /* NSTimerEx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSTimerEx.swift; sourceTree = "<group>"; };
+		B0D565991B4B942E00450137 /* ShareActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareActions.swift; sourceTree = "<group>"; };
+		B0D5659B1B4B944C00450137 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -49,6 +53,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B0D5659C1B4B944C00450137 /* Social.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -65,6 +70,7 @@
 		B050BC081B4B63AA00CCA6AC = {
 			isa = PBXGroup;
 			children = (
+				B0D5659B1B4B944C00450137 /* Social.framework */,
 				B050BC361B4B63B900CCA6AC /* Classes */,
 				B050BC131B4B63AA00CCA6AC /* KireiShare */,
 				B050BC291B4B63AA00CCA6AC /* KireiShareTests */,
@@ -125,6 +131,7 @@
 			children = (
 				B050BC371B4B63E200CCA6AC /* UIViewEx.swift */,
 				B050BC391B4B640D00CCA6AC /* KireiShareView.swift */,
+				B0D565991B4B942E00450137 /* ShareActions.swift */,
 			);
 			name = Classes;
 			path = KireiShare/Classes;
@@ -231,6 +238,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B050BC191B4B63AA00CCA6AC /* ViewController.swift in Sources */,
+				B0D5659A1B4B942E00450137 /* ShareActions.swift in Sources */,
 				B050BC3A1B4B640D00CCA6AC /* KireiShareView.swift in Sources */,
 				B050BC171B4B63AA00CCA6AC /* AppDelegate.swift in Sources */,
 				B050BC3C1B4B6B0800CCA6AC /* NSTimerEx.swift in Sources */,
@@ -432,6 +440,7 @@
 				B050BC321B4B63AA00CCA6AC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		B050BC331B4B63AA00CCA6AC /* Build configuration list for PBXNativeTarget "KireiShareTests" */ = {
 			isa = XCConfigurationList;
@@ -440,6 +449,7 @@
 				B050BC351B4B63AA00CCA6AC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

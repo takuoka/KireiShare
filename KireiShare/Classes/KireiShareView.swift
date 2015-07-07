@@ -10,14 +10,17 @@
 // * exclude enumで
 
 import UIKit
+import Social
 
-class KireiShareView : UIView {
+
+class KireiShareView : UIViewController {
 
     private let backgroundSheet = UIView()
     private let text:String!
     private let url:String!
     private let image:UIImage?
     private var buttons:[UIButton] = []
+    private var buttonActions:[()->()] = []
     private let defaultFont = UIFont(name: "HiraKakuProN-W6", size: 13)!
 
     private var maxSize:CGRect!
@@ -27,54 +30,69 @@ class KireiShareView : UIView {
     private let cancelButtonColor = UIColor(red: 0.972549, green: 0.972549, blue: 0.972549, alpha: 1)
     private let cancelButtonTextColor = UIColor(red: 184/255, green: 184/255, blue: 184/255, alpha: 1)
     private let iconMarginLeft:CGFloat = 9
-    
+
+
     init(text:String, url:String, image:UIImage?) {
         self.text = text
         self.url = url
         self.image = image
-        super.init(frame: UIScreen.mainScreen().bounds)
+        super.init(nibName: nil, bundle: nil)
+        maxSize = UIScreen.mainScreen().bounds
+        backgroundSheet.frame = maxSize
+        backgroundSheet.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.2)
+        self.view.addSubview(backgroundSheet)
+        addCancelButton {
+            self.disappear()
+        }
     }
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     
     
     func initViews() {
         println("initViews")
-        maxSize = UIScreen.mainScreen().bounds// TODO: 回転で変える
         
-        backgroundSheet.frame = maxSize
-        backgroundSheet.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.2)
-        self.addSubview(backgroundSheet)
-        
+        addButton(text:"その他", icon:nil) {
+            println("そのた")
+            ShareActions.openShareView("aefjoa", url: "http://aefae", viewController: self)
+        }
+        addButton(text:"Copy Link", icon:nil) {
+            println("こぴ")
+        }
+        addButton(text:"Facebook", icon:nil) {
+            println("fb")
+        }
+        addButton(text:"Twitter", icon:UIImage(named: "twitter")) {
+            println("twiた")
+        }
+    }
+    
+    
+    func addCancelButton(onTapFunc:()->()) {
         addButton(
             text: "キャンセル",
             icon: nil,
             height: cancelButtonHeight,
             bgColor: cancelButtonColor,
             textColor: cancelButtonTextColor,
-            borderColor: nil
+            borderColor: nil,
+            onTapFunc: onTapFunc
         )
-        
-        addButton(text:"その他", icon:nil)
-        addButton(text:"Copy Link", icon:nil)
-        addButton(text:"Facebook", icon:nil)
-        addButton(text:"Twitter", icon:UIImage(named: "twitter"))
     }
-    
-    
-    func addButton(#text:String, icon:UIImage?) {
+    func addButton(#text:String, icon:UIImage?, onTapFunc:()->()) {
         addButton(
             text: text,
             icon: icon,
             height: buttonHeight,
             bgColor: UIColor.whiteColor(),
             textColor: UIColor.blackColor(),
-            borderColor: borderColor
+            borderColor: borderColor,
+            onTapFunc: onTapFunc
         )
     }
-    func addButton(#text:String, icon:UIImage?, height:CGFloat, bgColor:UIColor, textColor:UIColor, borderColor:UIColor?) {
+    func addButton(#text:String, icon:UIImage?, height:CGFloat, bgColor:UIColor, textColor:UIColor, borderColor:UIColor?, onTapFunc:()->()) {
         println("addButton")
         let btn = UIButton()
         let iconView = UIImageView(image: icon)
@@ -90,6 +108,7 @@ class KireiShareView : UIView {
             btn.bottom = buttons.last!.top
         }
 
+        iconView.contentMode = UIViewContentMode.Center
         label.text = text
         label.textAlignment = NSTextAlignment.Center
         label.font = self.defaultFont
@@ -101,18 +120,23 @@ class KireiShareView : UIView {
                 border.frame = CGRect(x: 0, y: 0, width: maxSize.width, height: 1)
                 border.bottom = buttons.last!.top
                 border.backgroundColor = borderColor!
-                self.addSubview(border)
+                self.view.addSubview(border)
                 btn.bottom = border.top
             }
         }
-        iconView.contentMode = UIViewContentMode.Center
+        btn.addTarget(self, action: "onTapButon:", forControlEvents: .TouchUpInside)
         
+        btn.tag = buttons.count
+        buttonActions.append(onTapFunc)
         buttons.append(btn)
         btn.addSubview(label)
         btn.addSubview(iconView)
-        self.addSubview(btn)
+        self.view.addSubview(btn)
     }
     
+    func onTapButon(btn:UIButton!) {
+        buttonActions[btn.tag]()
+    }
     
     
     
@@ -125,10 +149,12 @@ class KireiShareView : UIView {
         
         initViews()
         
-        window.addSubview(self)
+        window.addSubview(self.view)
     }
     
     func disappear() {
-        self.removeFromSuperview()
+        self.view.removeFromSuperview()
     }
 }
+
+
