@@ -14,6 +14,12 @@ import UIKit
 
 public class KireiShareView : UIViewController, UIGestureRecognizerDelegate {
 
+    
+    public var otherButtonText = "Other"
+    public var cancelText = "Cancel"
+    public var copyFinishedMessage = "Copy Succeed."
+    public var copyFaildedMessage = "Copy Failed."
+    
     private let text:String!
     private let url:String?
     private let image:UIImage?
@@ -40,10 +46,6 @@ public class KireiShareView : UIViewController, UIGestureRecognizerDelegate {
         get { return maxSize.height - buttons.last!.top }
     }
 
-    public var cancelText = "Cancel"
-    public var copyFinishedMessage = "Copy Succeed."
-    public var copyFaildedMessage = "Copy Failed."
-    
     private let backgroundSheet = UIView()
     private let buttonSheet = UIView()
     private let copiedMessageView = UIView()
@@ -107,7 +109,7 @@ public class KireiShareView : UIViewController, UIGestureRecognizerDelegate {
         addCancelButton {
             self.disappear()
         }
-        addButton(text:"Other", icon:nil) {
+        addButton(text:otherButtonText, icon:nil) {
             ShareActions.openShareView(self, text: self.text, url: self.url, image: self.image) {
                 self.disappear()
             }

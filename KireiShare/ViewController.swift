@@ -36,6 +36,7 @@ class ViewController: UIViewController {
             url  : "http://fjie.com",
             image: nil
         )
+        shareView.otherButtonText = "その他"
         shareView.copyFinishedMessage = "コピーしました。"
         shareView.cancelText = "キャンセル"
         shareView.show()
