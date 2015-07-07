@@ -34,9 +34,9 @@ class ViewController: UIViewController {
         let shareView = KireiShareView(
             text : "tstee",
             url  : "http://fjie.com",
-            image: UIImage()
+            image: nil
         )
-
+        shareView.copyFinishedMessage = "コピーしました。"
         shareView.show()
     }
 }

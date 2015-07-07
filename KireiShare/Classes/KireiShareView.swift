@@ -10,14 +10,12 @@
 // * exclude enumで
 
 import UIKit
-import Social
 
 
-class KireiShareView : UIViewController {
+public class KireiShareView : UIViewController {
 
-    private let backgroundSheet = UIView()
     private let text:String!
-    private let url:String!
+    private let url:String?
     private let image:UIImage?
     private var buttons:[UIButton] = []
     private var buttonActions:[()->()] = []
@@ -31,43 +29,66 @@ class KireiShareView : UIViewController {
     private let cancelButtonTextColor = UIColor(red: 184/255, green: 184/255, blue: 184/255, alpha: 1)
     private let iconMarginLeft:CGFloat = 9
 
+    public var copyFinishedMessage = "Succeed."
+    
+    private let backgroundSheet = UIView()
+    private let buttonSheet = UIView()
 
-    init(text:String, url:String, image:UIImage?) {
+    public init(text:String, url:String?, image:UIImage?) {
         self.text = text
         self.url = url
         self.image = image
         super.init(nibName: nil, bundle: nil)
+        self.setup()
+    }
+    required public init(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    func setup() {
         maxSize = UIScreen.mainScreen().bounds
+
         backgroundSheet.frame = maxSize
         backgroundSheet.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.2)
         self.view.addSubview(backgroundSheet)
+        
+        buttonSheet.frame = maxSize
+        self.view.addSubview(buttonSheet)
+
         addCancelButton {
             self.disappear()
         }
     }
-    required init(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
     
     
     func initViews() {
         println("initViews")
-        
         addButton(text:"その他", icon:nil) {
             println("そのた")
-            ShareActions.openShareView("aefjoa", url: "http://aefae", viewController: self)
+            ShareActions.openShareView(self, text: self.text, url: self.url, image: self.image) {
+                self.disappear()
+            }
         }
         addButton(text:"Copy Link", icon:nil) {
             println("こぴ")
+            if self.url != nil {
+                UIPasteboard.generalPasteboard().string = self.url
+            }
         }
         addButton(text:"Facebook", icon:nil) {
             println("fb")
+            ShareActions.openComposer(self, type: ComposerType.Facebook, text: self.text, url: self.url, image: self.image) {
+                self.disappear()
+            }
         }
         addButton(text:"Twitter", icon:UIImage(named: "twitter")) {
             println("twiた")
+            ShareActions.openComposer(self, type: ComposerType.Twitter, text: self.text, url: self.url, image: self.image) {
+                self.disappear()
+            }
         }
     }
+    
     
     
     func addCancelButton(onTapFunc:()->()) {
@@ -131,7 +152,7 @@ class KireiShareView : UIViewController {
         buttons.append(btn)
         btn.addSubview(label)
         btn.addSubview(iconView)
-        self.view.addSubview(btn)
+        buttonSheet.addSubview(btn)
     }
     
     func onTapButon(btn:UIButton!) {
@@ -140,7 +161,7 @@ class KireiShareView : UIViewController {
     
     
     
-    func show() {
+    public func show() {
         if UIApplication.sharedApplication().delegate == nil{
             println("Window is not found.")
             return
