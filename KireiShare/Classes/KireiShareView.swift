@@ -58,7 +58,6 @@ public class KireiShareView : UIViewController, UIGestureRecognizerDelegate {
 
     
     
-    
     public init(text:String, url:String?, image:UIImage?) {
         self.text = text
         self.url = url
@@ -71,7 +70,6 @@ public class KireiShareView : UIViewController, UIGestureRecognizerDelegate {
     }
 
     private func setup() {
-        
         backgroundSheet.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(backgroundAlpha)
         copiedMessageView.backgroundColor = copiedMessageViewColor
         copiedMessageView.hidden = true
@@ -91,10 +89,18 @@ public class KireiShareView : UIViewController, UIGestureRecognizerDelegate {
     }
     
     
-    private func imageNamed(name:String)->UIImage? {
-        return UIImage(named: name, inBundle: NSBundle(forClass: KireiShareView.self), compatibleWithTraitCollection: nil)
+    public func show() {
+        viewWillShow()
+        showAnimation()
     }
     
+    func disappear() {
+        disapperAnimation()
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+    
+    
+
     
     private func viewWillShow() {
         addCancelButton {
@@ -131,6 +137,7 @@ public class KireiShareView : UIViewController, UIGestureRecognizerDelegate {
         
         layoutViews()
     }
+    
     
     
     
@@ -196,9 +203,101 @@ public class KireiShareView : UIViewController, UIGestureRecognizerDelegate {
     }
     
     
-    func layoutViews() {
-        println("layoutViews")
+    
+    
+    
+    func onTapButon(btn:UIButton!) {
+        buttonActions[btn.tag]()
+    }
+    
+    func didTapBackgroundSheet() {
+        disappear()
+    }
+    
+    
+    var orientation:UIInterfaceOrientation!
+    func orientationDidChanged() {
+        let newOrientation = getOrientation()
+        switch newOrientation {
+        case .Portrait, .PortraitUpsideDown:
+            if orientation != nil && orientation != .Portrait {
+                didPortrait()
+            }
+        case .LandscapeLeft, .LandscapeRight:
+            didLandScape()
+        default:
+            print("")
+        }
+        orientation = getOrientation()
+    }
+    func didPortrait() {
+        self.layoutViews()
+    }
+    func didLandScape() {
+        self.layoutViews()
+    }
+
+    
+}
+
+
+
+
+
+
+
+extension KireiShareView {
+    
+    private func imageNamed(name:String)->UIImage? {
+        return UIImage(named: name, inBundle: NSBundle(forClass: KireiShareView.self), compatibleWithTraitCollection: nil)
+    }
+    
+    func showAnimation() {
+        if UIApplication.sharedApplication().delegate == nil{
+            println("window is not found.")
+            return
+        }
+        buttonSheet.top = buttonSheet.top + buttonsHeight
+        backgroundSheet.alpha = 0
+
+        let window:UIWindow = UIApplication.sharedApplication().delegate!.window!!
+        window.addSubview(copiedMessageView)
+        window.addSubview(self.view)
         
+        UIView.animateWithDuration(0.2, delay: 0, options: UIViewAnimationOptions.CurveEaseInOut, animations: { () -> Void in
+            self.backgroundSheet.alpha = 1
+            self.buttonSheet.top = self.buttonSheet.top - self.buttonsHeight
+            },
+            completion: { _ in
+        })
+    }
+    
+    func disapperAnimation() {
+        UIView.animateWithDuration(0.2, delay: 0, options: UIViewAnimationOptions.CurveEaseInOut, animations: { () -> Void in
+            self.backgroundSheet.alpha = 0
+            self.buttonSheet.top = self.buttonSheet.top + self.buttonsHeight
+            },
+            completion: { _ in
+                self.view.removeFromSuperview()
+                if self.copiedMessageView.hidden == true {
+                    self.copiedMessageView.removeFromSuperview()
+                }
+                else {
+                    NSTimer.schedule(delay: 1) { timer in
+                        UIView.animateWithDuration(0.2, delay: 0, options: UIViewAnimationOptions.CurveEaseInOut, animations: { () -> Void in
+                            self.copiedMessageView.alpha = 0
+                            },
+                            completion: { _ in
+                                self.copiedMessageView.removeFromSuperview()
+                        })
+                    }
+                }
+            }
+        )
+    }
+    
+    
+    func layoutViews() {
         maxSize = UIScreen.mainScreen().bounds
         buttonSheet.frame = maxSize
         backgroundSheet.frame = maxSize
@@ -231,7 +330,7 @@ public class KireiShareView : UIViewController, UIGestureRecognizerDelegate {
             iconView.frame = CGRect(x: iconMarginLeft, y: 0, width: height, height: height)
             label.frame = CGRect(x: 0, y: 0, width: maxSize.width, height: height)
             btn.frame = CGRect(x: 0, y: 0, width: maxSize.width, height: height)
-
+            
             if preBtn == nil {
                 btn.bottom = maxSize.height
             }
@@ -247,90 +346,6 @@ public class KireiShareView : UIViewController, UIGestureRecognizerDelegate {
             }
         }
     }
-    
-    
-    
-    func onTapButon(btn:UIButton!) {
-        buttonActions[btn.tag]()
-    }
-    
-    func didTapBackgroundSheet() {
-        disappear()
-    }
-    
-    
-    var orientation:UIInterfaceOrientation!
-    func orientationDidChanged() {
-        let newOrientation = getOrientation()
-        switch newOrientation {
-        case .Portrait, .PortraitUpsideDown:
-            if orientation != nil && orientation != .Portrait {
-                didPortrait()
-            }
-        case .LandscapeLeft, .LandscapeRight:
-            didLandScape()
-        default:
-            print("")
-        }
-        orientation = getOrientation()
-    }
-    func didPortrait() {
-        println("👉portrait")
-        self.layoutViews()
-    }
-    func didLandScape() {
-        println("👉landscape")
-        self.layoutViews()
-    }
 
-    
-    
-    public func show() {
-        if UIApplication.sharedApplication().delegate == nil{
-            println("window is not found.")
-            return
-        }
-        let window:UIWindow = UIApplication.sharedApplication().delegate!.window!!
-        viewWillShow()
-        
-        buttonSheet.top = buttonSheet.top + buttonsHeight
-        backgroundSheet.alpha = 0
-        
-        window.addSubview(copiedMessageView)
-        window.addSubview(self.view)
-        
-        UIView.animateWithDuration(0.2, delay: 0, options: UIViewAnimationOptions.CurveEaseInOut, animations: { () -> Void in
-            self.backgroundSheet.alpha = 1
-            self.buttonSheet.top = self.buttonSheet.top - self.buttonsHeight
-        },
-        completion: { _ in
-        })
-    }
-    
-    func disappear() {
-        UIView.animateWithDuration(0.2, delay: 0, options: UIViewAnimationOptions.CurveEaseInOut, animations: { () -> Void in
-            self.backgroundSheet.alpha = 0
-            self.buttonSheet.top = self.buttonSheet.top + self.buttonsHeight
-        },
-        completion: { _ in
-            self.view.removeFromSuperview()
-            if self.copiedMessageView.hidden == false {
-                NSTimer.schedule(delay: 1) { timer in
-                    UIView.animateWithDuration(0.2, delay: 0, options: UIViewAnimationOptions.CurveEaseInOut, animations: { () -> Void in
-                        self.copiedMessageView.alpha = 0
-                    },
-                    completion: { _ in
-                        self.copiedMessageView.removeFromSuperview()
-                    })
-                }
-            }
-            else {
-                self.copiedMessageView.removeFromSuperview()
-            }
-        })
-        
-        NSNotificationCenter.defaultCenter().removeObserver(self)
-    }
 }
-
 
