@@ -17,4 +17,5 @@ Pod::Spec.new do |s|
   s.source        = { :git => "https://github.com/entotsu/KireiShare.git"}#, :tag => "0.0.1" }
   s.source_files  = "Classes", "KireiShare/Classes/*.swift"
   s.resources = 'KireiShare/Classes/Images.xcassets'
+  s.framework = 'Social'
 end
