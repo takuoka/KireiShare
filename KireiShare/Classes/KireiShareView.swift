@@ -25,6 +25,9 @@ public class KireiShareView : UIViewController, UIGestureRecognizerDelegate {
     private let url:String?
     private let image:UIImage?
     private var buttons:[UIButton] = []
+    private var labels:[UILabel] = []
+    private var icons:[UIImageView] = []
+    private var borders:[UIView?] = []
     private var buttonActions:[()->()] = []
     private let defaultFont = UIFont(name: "HiraKakuProN-W6", size: 13)!
 
@@ -68,30 +71,13 @@ public class KireiShareView : UIViewController, UIGestureRecognizerDelegate {
     }
 
     private func setup() {
-        maxSize = UIScreen.mainScreen().bounds
-
-        backgroundSheet.frame = maxSize
+        
         backgroundSheet.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(backgroundAlpha)
-        buttonSheet.frame = maxSize
-        
-        
-        copiedMessageView.frame = CGRect(
-            x: 0,
-            y: maxSize.height - copiedMessageViewHeight,
-            width: maxSize.width,
-            height: copiedMessageViewHeight
-        )
         copiedMessageView.backgroundColor = copiedMessageViewColor
         copiedMessageView.hidden = true
-        
         copiedMessageLabel.font = copiedMessageFont
-        copiedMessageLabel.frame = CGRect(
-            x: copiedMessageLabelMarginLeft, y: 0,
-            width: maxSize.width, height: copiedMessageViewHeight
-        )
         copiedMessageLabel.textColor = copiedMessageLabelTextColor
         copiedMessageView.addSubview(copiedMessageLabel)
-
         
         self.view.addSubview(backgroundSheet)
         self.view.addSubview(buttonSheet)
@@ -100,6 +86,8 @@ public class KireiShareView : UIViewController, UIGestureRecognizerDelegate {
         tapGesture.delegate = self
         buttonSheet.userInteractionEnabled = true
         buttonSheet.addGestureRecognizer(tapGesture)
+
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "orientationDidChanged", name:UIDeviceOrientationDidChangeNotification, object: nil)
     }
     
     
@@ -140,6 +128,8 @@ public class KireiShareView : UIViewController, UIGestureRecognizerDelegate {
                 self.disappear()
             }
         }
+        
+        layoutViews()
     }
     
     
@@ -171,14 +161,15 @@ public class KireiShareView : UIViewController, UIGestureRecognizerDelegate {
         let iconView = UIImageView(image: icon)
         let label = UILabel()
 
-        iconView.frame = CGRect(x: iconMarginLeft, y: 0, width: height, height: height)
-        label.frame = CGRect(x: 0, y: 0, width: maxSize.width, height: height)
-        btn.frame = CGRect(x: 0, y: 0, width: maxSize.width, height: height)
-        if buttons.last == nil {
-            btn.bottom = maxSize.height
-        }
-        else {
-            btn.bottom = buttons.last!.top
+        btn.tag = buttons.count
+        buttons.append(btn)
+        icons.append(iconView)
+        labels.append(label)
+        buttonActions.append(onTapFunc)
+        
+        var preBtn:UIButton? = nil
+        if btn.tag != 0 {
+            preBtn = buttons[(btn.tag - 1)]
         }
 
         iconView.contentMode = UIViewContentMode.Center
@@ -187,25 +178,77 @@ public class KireiShareView : UIViewController, UIGestureRecognizerDelegate {
         label.font = self.defaultFont
         label.textColor = textColor
         btn.backgroundColor = bgColor
+
+        var border: UIView? = nil
         if borderColor != nil {
-            if buttons.count >= 2 {
-                let border = UIView()
-                border.frame = CGRect(x: 0, y: 0, width: maxSize.width, height: 1)
-                border.bottom = buttons.last!.top
-                border.backgroundColor = borderColor!
-                buttonSheet.addSubview(border)
-                btn.bottom = border.top
+            if btn.tag >= 2 {
+                border = UIView()
+                border!.backgroundColor = borderColor!
+                buttonSheet.addSubview(border!)
             }
         }
         btn.addTarget(self, action: "onTapButon:", forControlEvents: .TouchUpInside)
-        
-        btn.tag = buttons.count
-        buttonActions.append(onTapFunc)
-        buttons.append(btn)
+        borders.append(border)
+
         btn.addSubview(label)
         btn.addSubview(iconView)
         buttonSheet.addSubview(btn)
     }
+    
+    
+    func layoutViews() {
+        println("layoutViews")
+        
+        maxSize = UIScreen.mainScreen().bounds
+        buttonSheet.frame = maxSize
+        backgroundSheet.frame = maxSize
+        
+        copiedMessageView.frame = CGRect(
+            x: 0,
+            y: maxSize.height - copiedMessageViewHeight,
+            width: maxSize.width,
+            height: copiedMessageViewHeight
+        )
+        
+        copiedMessageLabel.frame = CGRect(
+            x: copiedMessageLabelMarginLeft, y: 0,
+            width: maxSize.width, height: copiedMessageViewHeight
+        )
+        
+        for btn in buttons {
+            let iconView = icons[btn.tag]
+            let label = labels[btn.tag]
+            var preBtn:UIButton? = nil
+            if btn.tag != 0 {
+                preBtn = buttons[(btn.tag - 1)]
+            }
+            
+            var height = buttonHeight
+            if btn.tag == 0 {
+                height = cancelButtonHeight
+            }
+            
+            iconView.frame = CGRect(x: iconMarginLeft, y: 0, width: height, height: height)
+            label.frame = CGRect(x: 0, y: 0, width: maxSize.width, height: height)
+            btn.frame = CGRect(x: 0, y: 0, width: maxSize.width, height: height)
+
+            if preBtn == nil {
+                btn.bottom = maxSize.height
+            }
+            else {
+                btn.bottom = preBtn!.top
+            }
+            
+            if borders[btn.tag] != nil {
+                let brdr:UIView = borders[btn.tag]!
+                brdr.frame = CGRect(x: 0, y: 0, width: maxSize.width, height: 1)
+                brdr.bottom = preBtn!.top//borderがあるならpreBtnはある
+                btn.bottom = brdr.top
+            }
+        }
+    }
+    
+    
     
     func onTapButon(btn:UIButton!) {
         buttonActions[btn.tag]()
@@ -216,7 +259,30 @@ public class KireiShareView : UIViewController, UIGestureRecognizerDelegate {
     }
     
     
-    
+    var orientation:UIInterfaceOrientation!
+    func orientationDidChanged() {
+        let newOrientation = getOrientation()
+        switch newOrientation {
+        case .Portrait, .PortraitUpsideDown:
+            if orientation != nil && orientation != .Portrait {
+                didPortrait()
+            }
+        case .LandscapeLeft, .LandscapeRight:
+            didLandScape()
+        default:
+            print("")
+        }
+        orientation = getOrientation()
+    }
+    func didPortrait() {
+        println("👉portrait")
+        self.layoutViews()
+    }
+    func didLandScape() {
+        println("👉landscape")
+        self.layoutViews()
+    }
+
     
     
     public func show() {
@@ -262,6 +328,8 @@ public class KireiShareView : UIViewController, UIGestureRecognizerDelegate {
                 self.copiedMessageView.removeFromSuperview()
             }
         })
+        
+        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
 }
 
