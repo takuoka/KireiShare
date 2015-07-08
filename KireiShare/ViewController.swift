@@ -37,6 +37,7 @@ class ViewController: UIViewController {
             image: nil
         )
         shareView.otherButtonText = "その他"
+        shareView.copyLinkText = "リンクをコピー"
         shareView.copyFinishedMessage = "コピーしました。"
         shareView.cancelText = "キャンセル"
         shareView.show()

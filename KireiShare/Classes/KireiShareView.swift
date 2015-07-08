@@ -8,7 +8,7 @@
 
 // 🌱 TODO
 // * exclude enumで
-
+import Foundation
 import UIKit
 
 
@@ -19,6 +19,7 @@ public class KireiShareView : UIViewController, UIGestureRecognizerDelegate {
     public var cancelText = "Cancel"
     public var copyFinishedMessage = "Copy Succeed."
     public var copyFaildedMessage = "Copy Failed."
+    public var copyLinkText = "Copy Link"
     
     private let text:String!
     private let url:String?
@@ -116,7 +117,7 @@ public class KireiShareView : UIViewController, UIGestureRecognizerDelegate {
                 self.disappear()
             }
         }
-        addButton(text:"Copy Link", icon: imageNamed("link")) {
+        addButton(text:copyLinkText, icon: imageNamed("link")) {
             if self.url != nil {
                 UIPasteboard.generalPasteboard().string = self.url
                 if (UIPasteboard.generalPasteboard().string == self.url) {
