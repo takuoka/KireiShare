@@ -30,15 +30,20 @@ class ViewController: UIViewController {
     }
 
     func onTapButton() {
-        let shareView = KireiShareView(
-            text : "tstee",
-            url  : "http://fjie.com",
-            image: nil
-        )
+        let shareView = KireiShareView(info: ShareInfo(text: "aaaa", url: "http://aewfae/", image: nil))
         shareView.otherButtonText = "その他"
         shareView.copyLinkText = "リンクをコピー"
         shareView.copyFinishedMessage = "コピーしました。"
         shareView.cancelText = "キャンセル"
+        shareView.buttonList = [
+            .CopyLink,
+            .Activity,
+            .Facebook,
+            .Twitter,
+            ShareType.Original(text: "test", icon: nil, onTap: {
+                shareView.disappear()
+            })
+        ]
         shareView.show()
     }
 }

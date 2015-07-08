@@ -10,20 +10,102 @@
 // * exclude enumで
 import Foundation
 import UIKit
+import Social
+
+
+public class ShareInfo {
+    public let text:String!
+    public let url:String?
+    public let image:UIImage?
+
+    init(text:String, url:String?, image:UIImage?) {
+        self.text = text
+        self.url = url
+        self.image = image
+    }
+}
+
+
+
+
+public enum ShareType {
+    case Twitter
+    case Facebook
+    case CopyLink
+    case Activity
+    case Original(text:String, icon:UIImage?, onTap:()->())
+    func value() -> String {
+        switch self {
+        case .Twitter  : return SLServiceTypeTwitter
+        case .Facebook : return SLServiceTypeFacebook
+        case .CopyLink : return "CopyLink"
+        case .Activity : return "Activity"
+        case .Original : return "Original"
+        }
+    }
+    func imageName() -> String {
+        switch self {
+        case .Twitter  : return "twitter"
+        case .Facebook : return "facebook"
+        case .CopyLink : return "link"
+        case .Activity : return "other"
+        default : return "bugfuck"
+        }
+    }
+}
+// type behaver
+extension KireiShareView {
+    private func buttonText(#type:ShareType) -> String {
+        switch type {
+        case .Twitter: return "Twitter"
+        case .Facebook: return "Facebook"
+        case .Activity: return otherButtonText
+        case .CopyLink: return copyLinkText
+        case let .Original(text, icon, onTap): return text
+        }
+    }
+    private func buttonIcon(#type:ShareType)-> UIImage? {
+        switch type {
+        case let .Original(text, icon, onTap): return icon
+        default: return imageNamed(type.imageName())
+        }
+    }
+    private func typeBehave(type:ShareType) {
+        switch type {
+        case .Twitter, .Facebook, .Activity:
+            self.openComposer(type) {
+                self.disappear()
+            }
+        case .CopyLink:
+            self.copyLink()
+            self.disappear()
+        case let .Original(text, icon, onTap):
+            onTap()
+        }
+    }
+    func addButton(type:ShareType) {
+        addButton(text: buttonText(type: type), icon: buttonIcon(type:type)) {
+            self.typeBehave(type)
+        }
+    }
+}
+
+
+
+
 
 
 public class KireiShareView : UIViewController, UIGestureRecognizerDelegate {
-
     
+    public var buttonList:[ShareType] = []
+    
+    public var shareInfo: ShareInfo!
     public var otherButtonText = "Other"
     public var cancelText = "Cancel"
     public var copyFinishedMessage = "Copy Succeed."
     public var copyFaildedMessage = "Copy Failed."
     public var copyLinkText = "Copy Link"
     
-    private let text:String!
-    private let url:String?
-    private let image:UIImage?
     private var buttons:[UIButton] = []
     private var labels:[UILabel] = []
     private var icons:[UIImageView] = []
@@ -50,18 +132,16 @@ public class KireiShareView : UIViewController, UIGestureRecognizerDelegate {
         get { return maxSize.height - buttons.last!.top }
     }
 
-    private let backgroundSheet = UIView()
-    private let buttonSheet = UIView()
-    private let copiedMessageView = UIView()
-    private let copiedMessageLabel = UILabel()
+    let backgroundSheet = UIView()
+    let buttonSheet = UIView()
+    let copiedMessageView = UIView()
+    let copiedMessageLabel = UILabel()
     
 
     
     
-    public init(text:String, url:String?, image:UIImage?) {
-        self.text = text
-        self.url = url
-        self.image = image
+    public init(info:ShareInfo) {
+        self.shareInfo = info
         super.init(nibName: nil, bundle: nil)
         self.setup()
     }
@@ -88,7 +168,6 @@ public class KireiShareView : UIViewController, UIGestureRecognizerDelegate {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "orientationDidChanged", name:UIDeviceOrientationDidChangeNotification, object: nil)
     }
     
-    
     public func show() {
         viewWillShow()
         showAnimation()
@@ -98,113 +177,23 @@ public class KireiShareView : UIViewController, UIGestureRecognizerDelegate {
         disapperAnimation()
         NSNotificationCenter.defaultCenter().removeObserver(self)
     }
-    
-    
 
-    
     private func viewWillShow() {
+        
+        if buttonList.count == 0 {
+            buttonList = [.Activity, .CopyLink, .Facebook, .Twitter]
+        }
+        
         addCancelButton {
             self.disappear()
         }
-        addButton(text:otherButtonText, icon: imageNamed("other")) {
-            ShareActions.openShareView(self, text: self.text, url: self.url, image: self.image) {
-                self.disappear()
-            }
-        }
-        addButton(text:copyLinkText, icon: imageNamed("link")) {
-            if self.url != nil {
-                UIPasteboard.generalPasteboard().string = self.url
-                if (UIPasteboard.generalPasteboard().string == self.url) {
-                    self.copiedMessageLabel.text = self.copyFinishedMessage
-                }
-                else {
-                    self.copiedMessageLabel.text = self.copyFaildedMessage
-                }
-                self.copiedMessageView.hidden = false
-                self.disappear()
-            }
-        }
-        addButton(text:"Facebook", icon: imageNamed("facebook")) {
-            ShareActions.openComposer(self, type: ComposerType.Facebook, text: self.text, url: self.url, image: self.image) {
-                self.disappear()
-            }
-        }
-        addButton(text:"Twitter", icon: imageNamed("twitter")) {
-            ShareActions.openComposer(self, type: ComposerType.Twitter, text: self.text, url: self.url, image: self.image) {
-                self.disappear()
-            }
+
+        for buttonType in buttonList {
+            addButton(buttonType)
         }
         
         layoutViews()
     }
-    
-    
-    
-    
-    private func addCancelButton(onTapFunc:()->()) {
-        addButton(
-            text: cancelText,
-            icon: nil,
-            height: cancelButtonHeight,
-            bgColor: cancelButtonColor,
-            textColor: cancelButtonTextColor,
-            borderColor: nil,
-            onTapFunc: onTapFunc
-        )
-    }
-    func addButton(#text:String, icon:UIImage?, onTapFunc:()->()) {
-        addButton(
-            text: text,
-            icon: icon,
-            height: buttonHeight,
-            bgColor: UIColor.whiteColor(),
-            textColor: UIColor.blackColor(),
-            borderColor: borderColor,
-            onTapFunc: onTapFunc
-        )
-    }
-    func addButton(#text:String, icon:UIImage?, height:CGFloat, bgColor:UIColor, textColor:UIColor, borderColor:UIColor?, onTapFunc:()->()) {
-        let btn = UIButton()
-        let iconView = UIImageView(image: icon)
-        let label = UILabel()
-
-        btn.tag = buttons.count
-        buttons.append(btn)
-        icons.append(iconView)
-        labels.append(label)
-        buttonActions.append(onTapFunc)
-        
-        var preBtn:UIButton? = nil
-        if btn.tag != 0 {
-            preBtn = buttons[(btn.tag - 1)]
-        }
-
-        iconView.contentMode = UIViewContentMode.Center
-        label.text = text
-        label.textAlignment = NSTextAlignment.Center
-        label.font = self.defaultFont
-        label.textColor = textColor
-        btn.backgroundColor = bgColor
-
-        var border: UIView? = nil
-        if borderColor != nil {
-            if btn.tag >= 2 {
-                border = UIView()
-                border!.backgroundColor = borderColor!
-                buttonSheet.addSubview(border!)
-            }
-        }
-        btn.addTarget(self, action: "onTapButon:", forControlEvents: .TouchUpInside)
-        borders.append(border)
-
-        btn.addSubview(label)
-        btn.addSubview(iconView)
-        buttonSheet.addSubview(btn)
-    }
-    
-    
-    
-    
     
     func onTapButon(btn:UIButton!) {
         buttonActions[btn.tag]()
@@ -220,7 +209,7 @@ public class KireiShareView : UIViewController, UIGestureRecognizerDelegate {
         let newOrientation = getOrientation()
         switch newOrientation {
         case .Portrait, .PortraitUpsideDown:
-            if orientation != nil && orientation != .Portrait {
+            if orientation == nil || orientation != .Portrait {
                 didPortrait()
             }
         case .LandscapeLeft, .LandscapeRight:
@@ -230,29 +219,92 @@ public class KireiShareView : UIViewController, UIGestureRecognizerDelegate {
         }
         orientation = getOrientation()
     }
-    func didPortrait() {
+    private func didPortrait() {
         self.layoutViews()
     }
-    func didLandScape() {
+    private func didLandScape() {
         self.layoutViews()
     }
 
-    
 }
 
 
 
 
-
-
-
+// add button
 extension KireiShareView {
-    
+    private func addCancelButton(onTapFunc:()->()) {
+        addButton(
+            text: cancelText,
+            icon: nil,
+            height: cancelButtonHeight,
+            bgColor: cancelButtonColor,
+            textColor: cancelButtonTextColor,
+            borderColor: nil,
+            onTapFunc: onTapFunc
+        )
+    }
+    private func addButton(#text:String, icon:UIImage?, onTapFunc:()->()) {
+        addButton(
+            text: text,
+            icon: icon,
+            height: buttonHeight,
+            bgColor: UIColor.whiteColor(),
+            textColor: UIColor.blackColor(),
+            borderColor: borderColor,
+            onTapFunc: onTapFunc
+        )
+    }
+    private func addButton(#text:String, icon:UIImage?, height:CGFloat, bgColor:UIColor, textColor:UIColor, borderColor:UIColor?, onTapFunc:()->()) {
+        let btn = UIButton()
+        let iconView = UIImageView(image: icon)
+        let label = UILabel()
+        
+        btn.tag = buttons.count
+        buttons.append(btn)
+        icons.append(iconView)
+        labels.append(label)
+        buttonActions.append(onTapFunc)
+        
+        var preBtn:UIButton? = nil
+        if btn.tag != 0 {
+            preBtn = buttons[(btn.tag - 1)]
+        }
+        
+        iconView.contentMode = UIViewContentMode.Center
+        label.text = text
+        label.textAlignment = NSTextAlignment.Center
+        label.font = self.defaultFont
+        label.textColor = textColor
+        btn.backgroundColor = bgColor
+        
+        var border: UIView? = nil
+        if borderColor != nil {
+            if btn.tag >= 2 {
+                border = UIView()
+                border!.backgroundColor = borderColor!
+                buttonSheet.addSubview(border!)
+            }
+        }
+        btn.addTarget(self, action: "onTapButon:", forControlEvents: .TouchUpInside)
+        borders.append(border)
+        
+        btn.addSubview(label)
+        btn.addSubview(iconView)
+        buttonSheet.addSubview(btn)
+    }
+}
+
+
+
+
+// layout
+extension KireiShareView {
     private func imageNamed(name:String)->UIImage? {
         return UIImage(named: name, inBundle: NSBundle(forClass: KireiShareView.self), compatibleWithTraitCollection: nil)
     }
     
-    func showAnimation() {
+    private func showAnimation() {
         if UIApplication.sharedApplication().delegate == nil{
             println("window is not found.")
             return
@@ -272,7 +324,7 @@ extension KireiShareView {
         })
     }
     
-    func disapperAnimation() {
+    private func disapperAnimation() {
         UIView.animateWithDuration(0.2, delay: 0, options: UIViewAnimationOptions.CurveEaseInOut, animations: { () -> Void in
             self.backgroundSheet.alpha = 0
             self.buttonSheet.top = self.buttonSheet.top + self.buttonsHeight
@@ -297,7 +349,7 @@ extension KireiShareView {
     }
     
     
-    func layoutViews() {
+    private func layoutViews() {
         maxSize = UIScreen.mainScreen().bounds
         buttonSheet.frame = maxSize
         backgroundSheet.frame = maxSize
