@@ -14,9 +14,9 @@
 		B050BC2D1B4B63AA00CCA6AC /* KireiShareTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B050BC2C1B4B63AA00CCA6AC /* KireiShareTests.swift */; };
 		B050BC381B4B63E200CCA6AC /* UIViewEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = B050BC371B4B63E200CCA6AC /* UIViewEx.swift */; };
 		B050BC3A1B4B640D00CCA6AC /* KireiShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B050BC391B4B640D00CCA6AC /* KireiShareView.swift */; };
-		B0896B0F1B4CE01400CF603F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0896B0E1B4CE01400CF603F /* Foundation.framework */; };
+		B0896B0F1B4CE01400CF603F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0896B0E1B4CE01400CF603F /* Foundation.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		B0D5659A1B4B942E00450137 /* ShareActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0D565991B4B942E00450137 /* ShareActions.swift */; };
-		B0D5659C1B4B944C00450137 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0D5659B1B4B944C00450137 /* Social.framework */; };
+		B0D5659C1B4B944C00450137 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0D5659B1B4B944C00450137 /* Social.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		B0D5659E1B4BC00800450137 /* NSTimerEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0D5659D1B4BC00800450137 /* NSTimerEx.swift */; };
 		B0D565A01B4BCD7C00450137 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B0D5659F1B4BCD7C00450137 /* Images.xcassets */; };
 /* End PBXBuildFile section */
