@@ -29,9 +29,9 @@ extension KireiShareView {
     }
     
     
-    public func openComposer(type:ShareType, completion:(()->())?) {
+    public func openComposer(type:KireiShareType, completion:(()->())?) {
         switch type {
-        case .Activity:
+        case .Other:
             openActivityView(completion)
 
         default:

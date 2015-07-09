@@ -134,11 +134,11 @@
 			isa = PBXGroup;
 			children = (
 				B0D5659F1B4BCD7C00450137 /* Images.xcassets */,
-				B050BC371B4B63E200CCA6AC /* UIViewEx.swift */,
-				B09E53251B4D19E2009EE655 /* UIVIewControllerEx.swift */,
-				B0D5659D1B4BC00800450137 /* NSTimerEx.swift */,
 				B050BC391B4B640D00CCA6AC /* KireiShareView.swift */,
 				B0D565991B4B942E00450137 /* KireiShareView+Action.swift */,
+				B0D5659D1B4BC00800450137 /* NSTimerEx.swift */,
+				B050BC371B4B63E200CCA6AC /* UIViewEx.swift */,
+				B09E53251B4D19E2009EE655 /* UIVIewControllerEx.swift */,
 			);
 			name = Classes;
 			path = KireiShare/Classes;

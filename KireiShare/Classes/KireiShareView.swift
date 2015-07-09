@@ -11,12 +11,12 @@ import UIKit
 import Social
 
 
-public class ShareInfo {
-    public let text:String!
-    public let url:String?
-    public let image:UIImage?
+class KireiShareInfo {
+    let text:String!
+    let url:String?
+    let image:UIImage?
 
-    public init(text:String, url:String?, image:UIImage?) {
+    init(text:String, url:String?, image:UIImage?) {
         self.text = text
         self.url = url
         self.image = image
@@ -26,62 +26,68 @@ public class ShareInfo {
 
 
 
-public enum ShareType {
+public enum KireiShareType {
     case Twitter
     case Facebook
     case CopyLink
-    case Activity
-    case Original(text:String, icon:UIImage?, onTap:()->())
+    case Other
+    case Custom(title:String, icon:UIImage?, onTap:()->())
+
     func value() -> String {
         switch self {
         case .Twitter  : return SLServiceTypeTwitter
         case .Facebook : return SLServiceTypeFacebook
         case .CopyLink : return "CopyLink"
-        case .Activity : return "Activity"
-        case .Original : return "Original"
+        case .Other : return "Other"
+        case .Custom : return "Custom"
         }
     }
+
     func imageName() -> String {
         switch self {
         case .Twitter  : return "twitter"
         case .Facebook : return "facebook"
         case .CopyLink : return "link"
-        case .Activity : return "other"
+        case .Other : return "other"
         default : return "bugfuck"
         }
     }
 }
+
 // type behaver
 extension KireiShareView {
-    private func buttonText(#type:ShareType) -> String {
+    func buttonText(#type:KireiShareType) -> String {
         switch type {
-        case .Twitter: return "Twitter"
-        case .Facebook: return "Facebook"
-        case .Activity: return otherButtonText
-        case .CopyLink: return copyLinkText
-        case let .Original(text, icon, onTap): return text
+        case .Twitter  : return "Twitter"
+        case .Facebook : return "Facebook"
+        case .Other : return otherButtonTitle
+        case .CopyLink : return copyLinkButtonTitle
+        case let .Custom(title, icon, onTap): return title
         }
     }
-    private func buttonIcon(#type:ShareType)-> UIImage? {
+
+    func buttonIcon(#type:KireiShareType)-> UIImage? {
         switch type {
-        case let .Original(text, icon, onTap): return icon
+        case let .Custom(title, icon, onTap): return icon
         default: return imageNamed(type.imageName())
         }
     }
-    private func typeBehave(type:ShareType) {
+
+    func typeBehave(type:KireiShareType) {
         switch type {
-        case .Twitter, .Facebook, .Activity:
+        case .Twitter, .Facebook, .Other:
             self.openComposer(type) {
-                self.disappear()
+                self.dismiss()
             }
         case .CopyLink:
             self.copyLink()
-            self.disappear()
-        case let .Original(text, icon, onTap):
+            self.dismiss()
+        case let .Custom(title, icon, onTap):
             onTap()
         }
     }
-    func addButton(type:ShareType) {
+
+    func addButton(type:KireiShareType) {
         addButton(text: buttonText(type: type), icon: buttonIcon(type:type)) {
             self.typeBehave(type)
         }
@@ -95,41 +101,39 @@ extension KireiShareView {
 
 public class KireiShareView : UIViewController, UIGestureRecognizerDelegate {
     
-    public var buttonList:[ShareType] = []
-    
-    public var shareInfo: ShareInfo!
-    public var otherButtonText = "Other"
-    public var cancelText = "Cancel"
+    public var buttonList:[KireiShareType] = []
+    public var otherButtonTitle = "Other"
+    public var cancelButtonTitle = "Cancel"
     public var copyFinishedMessage = "Copy Succeed."
     public var copyFaildedMessage = "Copy Failed."
-    public var copyLinkText = "Copy Link"
+    public var copyLinkButtonTitle = "Copy Link"
+    public var animationDuration: NSTimeInterval = 0.2
+
+    private let defaultFont = UIFont(name: "HiraKakuProN-W6", size: 13)!
+    private var maxSize:CGRect!
+    private let buttonHeight:CGFloat = 60// TODO: あとで可変になるかも
+    private let cancelButtonHeight:CGFloat = 52// TODO: あとで可変になるかも
+    private let borderColor = UIColor(red: 246/255, green: 246/255, blue: 246/255, alpha: 1)
+    private let cancelButtonColor = UIColor(red: 0.972549, green: 0.972549, blue: 0.972549, alpha: 1)
+    private let cancelButtonTextColor = UIColor(red: 184/255, green: 184/255, blue: 184/255, alpha: 1)
+    private let iconMarginLeft:CGFloat = 9
+    private var backgroundAlpha:CGFloat = 0.8
+    private let copiedMessageViewHeight:CGFloat = 50
+    private let copiedMessageLabelMarginLeft:CGFloat = 12
+    private let copiedMessageLabelTextColor = UIColor.whiteColor()
+    private let copiedMessageViewColor = UIColor(white: 0.275, alpha: 1)
+    private let copiedMessageFont = UIFont(name: "HiraKakuProN-W3", size: 12)!
+    private var buttonsHeight:CGFloat {
+        get { return maxSize.height - buttons.last!.top }
+    }
     
     private var buttons:[UIButton] = []
     private var labels:[UILabel] = []
     private var icons:[UIImageView] = []
     private var borders:[UIView?] = []
     private var buttonActions:[()->()] = []
-    private let defaultFont = UIFont(name: "HiraKakuProN-W6", size: 13)!
 
-    private var maxSize:CGRect!
-    private let buttonHeight:CGFloat = 60// TODO: あとで可変になるかも
-    private let cancelButtonHeight:CGFloat = 50// TODO: あとで可変になるかも
-    private let borderColor = UIColor(red: 246/255, green: 246/255, blue: 246/255, alpha: 1)
-    private let cancelButtonColor = UIColor(red: 0.972549, green: 0.972549, blue: 0.972549, alpha: 1)
-    private let cancelButtonTextColor = UIColor(red: 184/255, green: 184/255, blue: 184/255, alpha: 1)
-    private let iconMarginLeft:CGFloat = 9
-    private var backgroundAlpha:CGFloat = 0.8
-
-    private let copiedMessageViewHeight:CGFloat = 50
-    private let copiedMessageLabelMarginLeft:CGFloat = 12
-    private let copiedMessageLabelTextColor = UIColor.whiteColor()
-    private let copiedMessageViewColor = UIColor(white: 0.275, alpha: 1)
-    private let copiedMessageFont = UIFont(name: "HiraKakuProN-W3", size: 12)!
-
-    private var buttonsHeight:CGFloat {
-        get { return maxSize.height - buttons.last!.top }
-    }
-
+    var shareInfo: KireiShareInfo!
     let backgroundSheet = UIView()
     let buttonSheet = UIView()
     let copiedMessageView = UIView()
@@ -138,8 +142,8 @@ public class KireiShareView : UIViewController, UIGestureRecognizerDelegate {
 
     
     
-    public init(info:ShareInfo) {
-        self.shareInfo = info
+    public init(text:String, url:String?, image:UIImage?) {
+        self.shareInfo = KireiShareInfo(text: text, url: url, image: image)
         super.init(nibName: nil, bundle: nil)
         self.setup()
     }
@@ -171,7 +175,7 @@ public class KireiShareView : UIViewController, UIGestureRecognizerDelegate {
         showAnimation()
     }
     
-    public func disappear() {
+    public func dismiss() {
         disapperAnimation()
         NSNotificationCenter.defaultCenter().removeObserver(self)
     }
@@ -179,11 +183,11 @@ public class KireiShareView : UIViewController, UIGestureRecognizerDelegate {
     private func viewWillShow() {
         
         if buttonList.count == 0 {
-            buttonList = [.Activity, .CopyLink, .Facebook, .Twitter]
+            buttonList = [.Other, .CopyLink, .Facebook, .Twitter]
         }
         
         addCancelButton {
-            self.disappear()
+            self.dismiss()
         }
 
         for buttonType in buttonList {
@@ -198,7 +202,7 @@ public class KireiShareView : UIViewController, UIGestureRecognizerDelegate {
     }
     
     func didTapBackgroundSheet() {
-        disappear()
+        dismiss()
     }
     
     
@@ -233,7 +237,7 @@ public class KireiShareView : UIViewController, UIGestureRecognizerDelegate {
 extension KireiShareView {
     private func addCancelButton(onTapFunc:()->()) {
         addButton(
-            text: cancelText,
+            text: cancelButtonTitle,
             icon: nil,
             height: cancelButtonHeight,
             bgColor: cancelButtonColor,
@@ -314,7 +318,7 @@ extension KireiShareView {
         window.addSubview(copiedMessageView)
         window.addSubview(self.view)
         
-        UIView.animateWithDuration(0.2, delay: 0, options: UIViewAnimationOptions.CurveEaseInOut, animations: { () -> Void in
+        UIView.animateWithDuration(animationDuration, delay: 0, options: UIViewAnimationOptions.CurveEaseInOut, animations: { () -> Void in
             self.backgroundSheet.alpha = 1
             self.buttonSheet.top = self.buttonSheet.top - self.buttonsHeight
             },
@@ -323,7 +327,7 @@ extension KireiShareView {
     }
     
     private func disapperAnimation() {
-        UIView.animateWithDuration(0.2, delay: 0, options: UIViewAnimationOptions.CurveEaseInOut, animations: { () -> Void in
+        UIView.animateWithDuration(animationDuration, delay: 0, options: UIViewAnimationOptions.CurveEaseInOut, animations: { () -> Void in
             self.backgroundSheet.alpha = 0
             self.buttonSheet.top = self.buttonSheet.top + self.buttonsHeight
             },
@@ -334,7 +338,7 @@ extension KireiShareView {
                 }
                 else {
                     NSTimer.schedule(delay: 1) { timer in
-                        UIView.animateWithDuration(0.2, delay: 0, options: UIViewAnimationOptions.CurveEaseInOut, animations: { () -> Void in
+                        UIView.animateWithDuration(self.animationDuration, delay: 0, options: UIViewAnimationOptions.CurveEaseInOut, animations: { () -> Void in
                             self.copiedMessageView.alpha = 0
                             },
                             completion: { _ in
