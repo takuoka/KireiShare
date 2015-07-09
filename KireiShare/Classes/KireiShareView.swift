@@ -171,7 +171,7 @@ public class KireiShareView : UIViewController, UIGestureRecognizerDelegate {
         showAnimation()
     }
     
-    func disappear() {
+    public func disappear() {
         disapperAnimation()
         NSNotificationCenter.defaultCenter().removeObserver(self)
     }
