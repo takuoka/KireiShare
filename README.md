@@ -62,4 +62,4 @@ shareView.buttonList = [
 
 Developer: [@tk_365](https://twitter.com/tk_365)
 
-Designer: [@mackymakiosh](https://twitter.com/mackymakiosh)
+Designer: [@mackymakiosh](https://www.behance.net/mcky_mnml)
