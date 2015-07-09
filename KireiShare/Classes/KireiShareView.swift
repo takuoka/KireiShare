@@ -16,7 +16,7 @@ public class ShareInfo {
     public let url:String?
     public let image:UIImage?
 
-    init(text:String, url:String?, image:UIImage?) {
+    public init(text:String, url:String?, image:UIImage?) {
         self.text = text
         self.url = url
         self.image = image
