@@ -1,7 +1,7 @@
 
 
 # KireiShareView
-
+Simple & Beautiful ShareView.
 
 ![Output sample](https://github.com/entotsu/KireiShare/blob/master/demo.gif?raw=true)
 
@@ -56,3 +56,10 @@ shareView.buttonList = [
     ),
 ]
 ```
+
+
+-------------------------------------------------------------------------------------
+
+Developer: [@tk_365](https://twitter.com/tk_365)
+
+Designer: [@mackymakiosh](https://twitter.com/mackymakiosh)
