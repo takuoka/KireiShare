@@ -40,9 +40,13 @@ class ViewController: UIViewController {
             .Activity,
             .Facebook,
             .Twitter,
-            ShareType.Original(text: "test", icon: nil, onTap: {
-                shareView.disappear()
-            })
+            .Original(
+                text: "test",
+                icon: nil,
+                onTap: {
+                    shareView.disappear()
+                }
+            )
         ]
         shareView.show()
     }

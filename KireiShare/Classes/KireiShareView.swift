@@ -6,8 +6,6 @@
 //  Copyright (c) 2015年 Uniface. All rights reserved.
 //
 
-// 🌱 TODO
-// * exclude enumで
 import Foundation
 import UIKit
 import Social
