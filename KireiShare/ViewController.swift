@@ -15,7 +15,9 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         let testView = UIButton()
-        testView.backgroundColor = UIColor.redColor()
+        testView.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.4)
+        testView.setTitle("open", forState: .Normal)
+        testView.setTitleColor(UIColor.whiteColor(), forState: .Normal)
         testView.frame = CGRect(x: 100, y: 100, width: 100, height: 100)
         self.view.addSubview(testView)
         testView.addTarget(self, action: "onTapButton", forControlEvents: .TouchUpInside)
@@ -32,8 +34,8 @@ class ViewController: UIViewController {
     func onTapButton() {
 
         let shareView = KireiShareView(
-            text: "aaaa",
-            url: "http://aewfae/",
+            text: "Simple & Beautiful ShareView!",
+            url: "http://uniface.in/",
             image: nil
         )
 
