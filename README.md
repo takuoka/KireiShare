@@ -1,7 +1,9 @@
 
 
 # KireiShare
-Simple, useful and beautiful view for share action.
+Modal View for share action.
+Simple, useful and clean design.
+
 
 # Screenshot
 ![Output sample](https://github.com/entotsu/KireiShare/blob/master/demo.gif?raw=true)
