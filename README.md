@@ -1,7 +1,7 @@
 
 
 # KireiShare
-Modal View for share action.
+Modal view for share action.
 Simple, useful and clean design.
 
 
