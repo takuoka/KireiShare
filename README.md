@@ -1,7 +1,7 @@
 
 
 # KireiShare
-Simple & Beautiful ShareView.
+Simple, useful and beautiful view for share action.
 
 # Screenshot
 ![Output sample](https://github.com/entotsu/KireiShare/blob/master/demo.gif?raw=true)
