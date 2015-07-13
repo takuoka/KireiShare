@@ -3,6 +3,7 @@
 # KireiShare
 Simple & Beautiful ShareView.
 
+# Screenshot
 ![Output sample](https://github.com/entotsu/KireiShare/blob/master/demo.gif?raw=true)
 
 
