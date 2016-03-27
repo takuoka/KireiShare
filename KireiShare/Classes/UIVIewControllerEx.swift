@@ -14,7 +14,7 @@ extension UIViewController {
     }
     
     func setOrientation(orientation: UIInterfaceOrientation) {
-        var orientationNum: NSNumber = NSNumber(integer: orientation.rawValue)
+        let orientationNum: NSNumber = NSNumber(integer: orientation.rawValue)
         UIDevice.currentDevice().setValue(orientationNum, forKey: "orientation")
     }
     
