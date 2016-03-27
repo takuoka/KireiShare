@@ -20,11 +20,11 @@ class ViewController: UIViewController {
         testView.setTitleColor(UIColor.whiteColor(), forState: .Normal)
         testView.frame = CGRect(x: 100, y: 100, width: 100, height: 100)
         self.view.addSubview(testView)
-        testView.addTarget(self, action: "onTapButton", forControlEvents: .TouchUpInside)
+        testView.addTarget(self, action: #selector(ViewController.onTapButton), forControlEvents: .TouchUpInside)
         
-        NSTimer.schedule(delay: 1) { timer in
-            self.onTapButton()
-        }
+//        NSTimer.schedule(repeatInterval: 1) { timer in
+//            self.onTapButton()
+//        }
     }
 
     override func didReceiveMemoryWarning() {

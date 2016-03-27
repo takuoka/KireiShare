@@ -81,7 +81,7 @@ extension KireiShareView {
             activityItems: items,
             applicationActivities: nil
         )
-        activityVC.completionWithItemsHandler = {(activityType, isCompleted:Bool, returnedItems:Array!, error:NSError!) in
+        activityVC.completionWithItemsHandler = { activityType, isCompleted, returnedItems, error in
             if (isCompleted) {
                 completion?()
             }
