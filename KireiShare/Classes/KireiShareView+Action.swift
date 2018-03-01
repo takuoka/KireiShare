@@ -16,48 +16,48 @@ import Social
 extension KireiShareView {
     
     public func copyLink() {
-        UIPasteboard.generalPasteboard().string = shareInfo.url
+        UIPasteboard.general.string = shareInfo.url
 
-        if (UIPasteboard.generalPasteboard().string == shareInfo.url) {
+        if (UIPasteboard.general.string == shareInfo.url) {
             self.copiedMessageLabel.text = self.copyFinishedMessage
         }
         else {
             self.copiedMessageLabel.text = self.copyFaildedMessage
         }
 
-        self.copiedMessageView.hidden = false
+        self.copiedMessageView.isHidden = false
     }
     
     
     public func openComposer(type:KireiShareType, completion:(()->())?) {
         switch type {
         case .Other:
-            openActivityView(completion)
+            openActivityView(completion: completion)
 
         default:
             //if SLComposeViewController.isAvailableForServiceType(type.value()) {
             let composeVC = SLComposeViewController(forServiceType: type.value())
-            composeVC.setInitialText(shareInfo.text)
+            composeVC?.setInitialText(shareInfo.text)
             if shareInfo.url != nil {
                 if let urlObj = NSURL(string: shareInfo.url!) {
-                    composeVC.addURL(urlObj)
+                    composeVC?.add(urlObj as URL!)
                 }
             }
             if shareInfo.image != nil {
-                composeVC.addImage(shareInfo.image!)
+                composeVC?.add(shareInfo.image!)
             }
             
             if completion != nil {
-                composeVC.completionHandler = { (result:SLComposeViewControllerResult) -> () in
+                composeVC?.completionHandler = { (result:SLComposeViewControllerResult) -> () in
                     switch (result) {
-                    case SLComposeViewControllerResult.Done:
+                    case SLComposeViewControllerResult.done:
                         completion!()
-                    case SLComposeViewControllerResult.Cancelled:
+                    case SLComposeViewControllerResult.cancelled:
                         completion!()
                     }
                 }
             }
-            self.presentViewController(composeVC, animated: true, completion: nil)
+            self.present(composeVC!, animated: true, completion: nil)
         }
     }
 
@@ -65,7 +65,7 @@ extension KireiShareView {
     private func openActivityView(completion:(()->())?) {
         var items:[AnyObject] = []
 
-        items.append(shareInfo.text)
+        items.append(shareInfo.text as AnyObject)
 
         if shareInfo.url != nil {
             if let urlObj = NSURL(string: shareInfo.url!) {
@@ -86,6 +86,6 @@ extension KireiShareView {
                 completion?()
             }
         }
-        self.presentViewController(activityVC, animated: true, completion: nil)
+        self.present(activityVC, animated: true, completion: nil)
     }
 }
