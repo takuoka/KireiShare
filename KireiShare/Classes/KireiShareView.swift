@@ -85,9 +85,6 @@ extension KireiShareView {
     }
 
     func addButton(type: KireiShareType) {
-//        addButton(buttonText(type), icon: buttonIcon(type)) {
-//            self.typeBehave(type)
-//        }
         addButton(text: buttonText(type: type), icon: buttonIcon(type: type)) {
             self.typeBehave(type: type)
         }
@@ -112,8 +109,8 @@ public class KireiShareView : UIViewController, UIGestureRecognizerDelegate {
 
     public let defaultFont = UIFont(name: "HiraKakuProN-W6", size: 13)!
     public var maxSize: CGRect!
-    public let buttonHeight:CGFloat = 60// TODO: あとで可変になるかも
-    public let cancelButtonHeight:CGFloat = 52// TODO: あとで可変になるかも
+    public let buttonHeight:CGFloat = 60 // TODO: あとで可変になるかも
+    public let cancelButtonHeight:CGFloat = 52 // TODO: あとで可変になるかも
     public let borderColor = UIColor(red: 246/255, green: 246/255, blue: 246/255, alpha: 1)
     public let cancelButtonColor = UIColor(red: 0.972549, green: 0.972549, blue: 0.972549, alpha: 1)
     public let cancelButtonTextColor = UIColor(red: 184/255, green: 184/255, blue: 184/255, alpha: 1)
@@ -193,7 +190,6 @@ public class KireiShareView : UIViewController, UIGestureRecognizerDelegate {
         }
 
         for buttonType in buttonList {
-             // addButton(type: buttonType)
             addButton(type: buttonType)
         }
         
@@ -397,7 +393,7 @@ extension KireiShareView {
             if borders[btn.tag] != nil {
                 let brdr:UIView = borders[btn.tag]!
                 brdr.frame = CGRect(x: 0, y: 0, width: maxSize.width, height: 1)
-                brdr.bottom = preBtn!.top//borderがあるならpreBtnはある
+                brdr.bottom = preBtn!.top //borderがあるならpreBtnはある
                 btn.bottom = brdr.top
             }
         }
