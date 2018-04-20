@@ -10,19 +10,18 @@ import UIKit
 
 extension UIViewController {
     func getOrientation() -> UIInterfaceOrientation {
-        return UIApplication.sharedApplication().statusBarOrientation
+        return UIApplication.shared.statusBarOrientation
     }
     
     func setOrientation(orientation: UIInterfaceOrientation) {
-        let orientationNum: NSNumber = NSNumber(integer: orientation.rawValue)
-        UIDevice.currentDevice().setValue(orientationNum, forKey: "orientation")
+        let orientationNum: NSNumber = NSNumber(value: orientation.rawValue)
+        UIDevice.current.setValue(orientationNum, forKey: "orientation")
     }
     
     func isLandscape() -> Bool {
-        if (UIInterfaceOrientationIsLandscape(UIApplication.sharedApplication().statusBarOrientation)) {
+        if (UIInterfaceOrientationIsLandscape(UIApplication.shared.statusBarOrientation)) {
             return true
-        }
-        else {
+        } else {
             return false
         }
     }

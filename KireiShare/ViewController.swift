@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Social
 
 class ViewController: UIViewController {
 
@@ -15,34 +14,27 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         let testView = UIButton()
-        testView.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.4)
-        testView.setTitle("open", forState: .Normal)
-        testView.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+        testView.backgroundColor = UIColor.black.withAlphaComponent(0.4)
+        testView.setTitle("open", for: .normal)
+        testView.setTitleColor(.white, for: .normal)
         testView.frame = CGRect(x: 100, y: 100, width: 100, height: 100)
         self.view.addSubview(testView)
-        testView.addTarget(self, action: #selector(ViewController.onTapButton), forControlEvents: .TouchUpInside)
+        testView.addTarget(self, action: #selector(ViewController.onTapButton), for: .touchUpInside)
         
-//        NSTimer.schedule(repeatInterval: 1) { timer in
-//            self.onTapButton()
-//        }
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
-
-    func onTapButton() {
-
+    @objc func onTapButton() {
+        
         let shareView = KireiShareView(
             text: "Simple & Beautiful ShareView!",
             url: "http://uniface.in/",
             image: nil
         )
 
-        shareView.otherButtonTitle = "その他"
-        shareView.cancelButtonTitle = "キャンセル"
-        shareView.copyLinkButtonTitle = "リンクをコピー"
-        shareView.copyFinishedMessage = "コピーしました。"
+        shareView.otherButtonTitle = "Other"
+        shareView.cancelButtonTitle = "Cancel"
+        shareView.copyLinkButtonTitle = "Copy link"
+        shareView.copyFinishedMessage = "Finished message"
         shareView.animationDuration = 0.2
         
         shareView.buttonList = [
@@ -50,13 +42,9 @@ class ViewController: UIViewController {
             .CopyLink,
             .Facebook,
             .Twitter,
-            .Custom(
-                title: "test",
-                icon: nil,
-                onTap: {
-                    shareView.dismiss()
-                }
-            ),
+            .Custom(title: "Telegram", icon: UIImage(named: "telegram"), onTap: {
+                shareView.dismiss()
+            })
         ]
 
         shareView.show()
