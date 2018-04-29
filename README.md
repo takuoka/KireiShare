@@ -1,4 +1,4 @@
-
+![Gloss](https://github.com/entotsu/KireiShare/blob/master/images/kireiShare_logo.png)
 
 # KireiShare
 Modal view for share action.
