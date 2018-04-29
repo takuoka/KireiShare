@@ -44,7 +44,7 @@ class ViewController: UIViewController {
             .Twitter,
             .Custom(title: "Telegram", icon: UIImage(named: "telegram"), onTap: {
                 shareView.dismiss()
-            })
+            })            
         ]
 
         shareView.show()
