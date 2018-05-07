@@ -40,7 +40,7 @@ extension KireiShareView {
             composeVC?.setInitialText(shareInfo.text)
             if shareInfo.url != nil {
                 if let urlObj = NSURL(string: shareInfo.url!) {
-                    composeVC?.add(urlObj as URL!)
+                    composeVC?.add(urlObj as URL?)
                 }
             }
             if shareInfo.image != nil {

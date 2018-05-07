@@ -41,13 +41,9 @@ class ViewController: UIViewController {
             .Other,
             .CopyLink,
             .Facebook,
-            .Twitter,
-            .Custom(title: "Telegram", icon: UIImage(named: "telegram"), onTap: {
-                shareView.dismiss()
-            })            
+            .Twitter,                       
         ]
 
         shareView.show()
     }
 }
-

@@ -6,10 +6,9 @@
 //  Copyright (c) 2015年 Uniface. All rights reserved.
 //
 
-import Foundation
 import UIKit
 import Social
-
+import Foundation
 
 class KireiShareInfo {
     let text: String!
@@ -51,7 +50,7 @@ public enum KireiShareType {
     }
 }
 
-// type behaver
+// MARK: - Type behavior
 extension KireiShareView {
     func buttonText(type: KireiShareType) -> String {
         switch type {
@@ -92,11 +91,6 @@ extension KireiShareView {
     }
 }
 
-
-
-
-
-
 public class KireiShareView : UIViewController, UIGestureRecognizerDelegate {
     
     public var buttonList:[KireiShareType] = []
@@ -136,9 +130,6 @@ public class KireiShareView : UIViewController, UIGestureRecognizerDelegate {
     let buttonSheet = UIView()
     let copiedMessageView = UIView()
     let copiedMessageLabel = UILabel()
-    
-
-    
     
     public init(text:String, url:String?, image:UIImage?) {
         self.shareInfo = KireiShareInfo(text: text, url: url, image: image)
@@ -204,7 +195,6 @@ public class KireiShareView : UIViewController, UIGestureRecognizerDelegate {
         dismiss()
     }
     
-    
     var orientation:UIInterfaceOrientation!
     @objc func orientationDidChanged() {
         let newOrientation = getOrientation()
@@ -231,10 +221,7 @@ public class KireiShareView : UIViewController, UIGestureRecognizerDelegate {
 
 }
 
-
-
-
-// add button
+// MARK: - Add button
 extension KireiShareView {
     func addCancelButton(onTapFunc: @escaping ()->()) {
         addCustomizeButton(
@@ -247,6 +234,7 @@ extension KireiShareView {
             onTapFunc: onTapFunc
         )
     }
+    
     func addButton(text: String, icon: UIImage?, onTapFunc: @escaping ()->()) {
         addCustomizeButton(
             text: text,
@@ -258,6 +246,7 @@ extension KireiShareView {
             onTapFunc: onTapFunc
         )
     }
+    
     func addCustomizeButton(text:String, icon: UIImage?, height: CGFloat, bgColor: UIColor, textColor: UIColor, borderColor: UIColor?, onTapFunc: @escaping ()->()) {
         let btn = UIButton()
         let iconView = UIImageView(image: icon)
@@ -294,10 +283,7 @@ extension KireiShareView {
     }
 }
 
-
-
-
-// layout
+// MARK: - Layout
 extension KireiShareView {
     func imageNamed(name: String) -> UIImage? {
         return UIImage(named: name, in: Bundle(for: KireiShareView.self), compatibleWith: nil)
@@ -319,9 +305,7 @@ extension KireiShareView {
         UIView.animate(withDuration: animationDuration, delay: 0, options: UIViewAnimationOptions.curveEaseInOut, animations: { () -> Void in
             self.backgroundSheet.alpha = 1
             self.buttonSheet.top = self.buttonSheet.top - self.buttonsHeight
-            },
-            completion: { _ in
-        })
+            })
     }
     
     func disapperAnimation() {
@@ -398,6 +382,4 @@ extension KireiShareView {
             }
         }
     }
-
 }
-
