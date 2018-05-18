@@ -19,7 +19,7 @@
 		B09E53261B4D19E2009EE655 /* UIVIewControllerEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = B09E53251B4D19E2009EE655 /* UIVIewControllerEx.swift */; };
 		B0D5659A1B4B942E00450137 /* KireiShareView+Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0D565991B4B942E00450137 /* KireiShareView+Action.swift */; };
 		B0D5659E1B4BC00800450137 /* NSTimerEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0D5659D1B4BC00800450137 /* NSTimerEx.swift */; };
-		B0D565A01B4BCD7C00450137 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B0D5659F1B4BCD7C00450137 /* Images.xcassets */; };
+		B0D565A01B4BCD7C00450137 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B0D5659F1B4BCD7C00450137 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,7 +51,7 @@
 		B09E53251B4D19E2009EE655 /* UIVIewControllerEx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIVIewControllerEx.swift; sourceTree = "<group>"; };
 		B0D565991B4B942E00450137 /* KireiShareView+Action.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "KireiShareView+Action.swift"; sourceTree = "<group>"; };
 		B0D5659D1B4BC00800450137 /* NSTimerEx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSTimerEx.swift; sourceTree = "<group>"; };
-		B0D5659F1B4BCD7C00450137 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		B0D5659F1B4BCD7C00450137 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DEDFF172AFC924DA697FA77F /* Pods_KireiShareTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KireiShareTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -158,7 +158,7 @@
 			children = (
 				B050BC391B4B640D00CCA6AC /* KireiShareView.swift */,
 				5D7F7E0720A087DF00064D62 /* Supporting Files */,
-				B0D5659F1B4BCD7C00450137 /* Images.xcassets */,
+				B0D5659F1B4BCD7C00450137 /* Assets.xcassets */,
 			);
 			name = Classes;
 			path = KireiShare/Classes;
@@ -257,7 +257,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B0D565A01B4BCD7C00450137 /* Images.xcassets in Resources */,
+				B0D565A01B4BCD7C00450137 /* Assets.xcassets in Resources */,
 				5D06F76D20AEB84F00505A13 /* KireiShare.podspec in Resources */,
 				B050BC1C1B4B63AA00CCA6AC /* Main.storyboard in Resources */,
 				B050BC211B4B63AA00CCA6AC /* LaunchScreen.xib in Resources */,

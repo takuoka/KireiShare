@@ -15,6 +15,6 @@ Pod::Spec.new do |s|
     s.authors      = "Takuya Okamoto"
     s.platform     = :ios, "8.0"
     s.source       = { :git => "https://github.com/entotsu/KireiShare.git", :tag => "0.0.1" }
-    s.source_files = "KireiShare/Classes", "KireiShare/Classes/Supporting Files", "KireiShare/Classes/**/*.{h,m, swift}"
+    s.source_files = "KireiShare/Classes", "KireiShare/Classes/Supporting Files", "KireiShare/Classes/Assets.xcassets", "KireiShare/Classes/**/*.{h,m, swift}"
     s.swift_version = "4.0"
 end
