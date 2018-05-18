@@ -8,7 +8,6 @@
 
 import UIKit
 
-
 extension UIView {
     
     func findView<T>() -> T? {
@@ -20,12 +19,11 @@ extension UIView {
         return nil
     }
     
-    
     var top : CGFloat{
-        get{
+        get {
             return self.frame.origin.y
         }
-        set{
+        set {
             var frame       = self.frame
             frame.origin.y  = newValue
             self.frame      = frame
@@ -33,58 +31,54 @@ extension UIView {
     }
     
     var bottom : CGFloat{
-        get{
+        get {
             return frame.origin.y + frame.size.height
         }
-        set{
+        set {
             var frame       = self.frame
             frame.origin.y  = newValue - self.frame.size.height
             self.frame      = frame
         }
     }
     
-    
     var right : CGFloat{
-        get{
+        get {
             return self.frame.origin.x + self.frame.size.width
         }
-        set{
+        set {
             var frame       = self.frame
             frame.origin.x  = newValue - self.frame.size.width
             self.frame      = frame
         }
     }
     
-    
     var left : CGFloat{
-        get{
+        get {
             return self.frame.origin.x
         }
-        set{
+        set {
             var frame       = self.frame
             frame.origin.x  = newValue
             self.frame      = frame
         }
     }
     
-    
     var width : CGFloat{
-        get{
+        get {
             return self.frame.size.width
         }
-        set{
+        set {
             var frame         = self.frame
             frame.size.width  = newValue
             self.frame        = frame
         }
     }
     
-    
     var height : CGFloat{
-        get{
+        get {
             return self.frame.size.height
         }
-        set{
+        set {
             var frame          = self.frame
             frame.size.height  = newValue
             self.frame         = frame

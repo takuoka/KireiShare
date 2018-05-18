@@ -6,12 +6,8 @@
 //  Copyright (c) 2015年 Uniface. All rights reserved.
 //
 
-
-
 import UIKit
 import Social
-
-
 
 extension KireiShareView {
     
@@ -27,7 +23,6 @@ extension KireiShareView {
 
         self.copiedMessageView.isHidden = false
     }
-    
     
     public func openComposer(type:KireiShareType, completion:(()->())?) {
         switch type {
@@ -60,7 +55,6 @@ extension KireiShareView {
             self.present(composeVC!, animated: true, completion: nil)
         }
     }
-
     
     private func openActivityView(completion:(()->())?) {
         var items:[AnyObject] = []

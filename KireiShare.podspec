@@ -10,10 +10,11 @@ Pod::Spec.new do |s|
     s.name         = "KireiShare"
     s.version      = "0.0.1"
     s.summary      = "Modal view for sharing action."
-    spec.homepage  = "https://github.com/entotsu/KireiShare"
+    s.homepage     = "https://github.com/entotsu/KireiShare"
     s.license      = "MIT"
-    spec.authors   = "Takuya Okamoto"
+    s.authors      = "Takuya Okamoto"
     s.platform     = :ios, "8.0"
     s.source       = { :git => "https://github.com/entotsu/KireiShare.git", :tag => "0.0.1" }
-    s.source_files = "Classes", "Classes/**/*.{h,m, swift}"
+    s.source_files = "KireiShare/Classes", "KireiShare/Classes/Supporting Files", "KireiShare/Classes/**/*.{h,m, swift}"
+    s.swift_version = "4.0"
 end
