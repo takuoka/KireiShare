@@ -1,0 +1,16 @@
+PODS:
+  - KireiShare (0.0.1)
+
+DEPENDENCIES:
+  - KireiShare (from `../KireiShare`)
+
+EXTERNAL SOURCES:
+  KireiShare:
+    :path: "../KireiShare"
+
+SPEC CHECKSUMS:
+  KireiShare: 586cef11d431bb45d6e8f7980615208484d52f52
+
+PODFILE CHECKSUM: ad5d89c1f321c62527918bdc1ede1b279539f9fc
+
+COCOAPODS: 1.5.2

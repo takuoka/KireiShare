@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Pods_KireiShare
 
 class ViewController: UIViewController {
 
