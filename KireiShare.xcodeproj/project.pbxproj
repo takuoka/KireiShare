@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5D7F7E0920A0912900064D62 /* KireiShare.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 5D7F7E0820A0912900064D62 /* KireiShare.podspec */; };
 		B050BC171B4B63AA00CCA6AC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B050BC161B4B63AA00CCA6AC /* AppDelegate.swift */; };
 		B050BC191B4B63AA00CCA6AC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B050BC181B4B63AA00CCA6AC /* ViewController.swift */; };
 		B050BC1C1B4B63AA00CCA6AC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B050BC1A1B4B63AA00CCA6AC /* Main.storyboard */; };
@@ -31,6 +32,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5D7F7E0820A0912900064D62 /* KireiShare.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = KireiShare.podspec; sourceTree = "<group>"; };
 		B050BC111B4B63AA00CCA6AC /* KireiShare.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KireiShare.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B050BC151B4B63AA00CCA6AC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B050BC161B4B63AA00CCA6AC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -80,6 +82,7 @@
 		B050BC081B4B63AA00CCA6AC = {
 			isa = PBXGroup;
 			children = (
+				5D7F7E0820A0912900064D62 /* KireiShare.podspec */,
 				B050BC361B4B63B900CCA6AC /* Classes */,
 				B050BC131B4B63AA00CCA6AC /* KireiShare */,
 				B050BC291B4B63AA00CCA6AC /* KireiShareTests */,
@@ -228,6 +231,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B0D565A01B4BCD7C00450137 /* Images.xcassets in Resources */,
+				5D7F7E0920A0912900064D62 /* KireiShare.podspec in Resources */,
 				B050BC1C1B4B63AA00CCA6AC /* Main.storyboard in Resources */,
 				B050BC211B4B63AA00CCA6AC /* LaunchScreen.xib in Resources */,
 			);
