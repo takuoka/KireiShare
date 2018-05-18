@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		5BE33087E721C1E0E408CC4B /* Pods_KireiShare.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D620DC3C9E77E1951668DEF /* Pods_KireiShare.framework */; };
 		5D06F76D20AEB84F00505A13 /* KireiShare.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 5D06F76C20AEB84F00505A13 /* KireiShare.podspec */; };
-		7866EF29E6BE514AD72266C6 /* Pods_KireiShareTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEDFF172AFC924DA697FA77F /* Pods_KireiShareTests.framework */; };
 		B050BC171B4B63AA00CCA6AC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B050BC161B4B63AA00CCA6AC /* AppDelegate.swift */; };
 		B050BC191B4B63AA00CCA6AC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B050BC181B4B63AA00CCA6AC /* ViewController.swift */; };
 		B050BC1C1B4B63AA00CCA6AC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B050BC1A1B4B63AA00CCA6AC /* Main.storyboard */; };
@@ -38,7 +37,6 @@
 		51A062F5381D9FE1DE6AD377 /* Pods-KireiShare.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KireiShare.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KireiShare/Pods-KireiShare.debug.xcconfig"; sourceTree = "<group>"; };
 		5D06F76C20AEB84F00505A13 /* KireiShare.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = KireiShare.podspec; sourceTree = "<group>"; };
 		6D620DC3C9E77E1951668DEF /* Pods_KireiShare.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KireiShare.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		813DBB9B05B4E2BFC249C86E /* Pods-KireiShareTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KireiShareTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-KireiShareTests/Pods-KireiShareTests.release.xcconfig"; sourceTree = "<group>"; };
 		B050BC111B4B63AA00CCA6AC /* KireiShare.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KireiShare.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B050BC151B4B63AA00CCA6AC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B050BC161B4B63AA00CCA6AC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -54,7 +52,6 @@
 		B0D565991B4B942E00450137 /* KireiShareView+Action.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "KireiShareView+Action.swift"; sourceTree = "<group>"; };
 		B0D5659D1B4BC00800450137 /* NSTimerEx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSTimerEx.swift; sourceTree = "<group>"; };
 		B0D5659F1B4BCD7C00450137 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		CA095AD8B940786852B75019 /* Pods-KireiShareTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KireiShareTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KireiShareTests/Pods-KireiShareTests.debug.xcconfig"; sourceTree = "<group>"; };
 		DEDFF172AFC924DA697FA77F /* Pods_KireiShareTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KireiShareTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -71,7 +68,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7866EF29E6BE514AD72266C6 /* Pods_KireiShareTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -173,8 +169,6 @@
 			children = (
 				51A062F5381D9FE1DE6AD377 /* Pods-KireiShare.debug.xcconfig */,
 				31AEBF9F4CAAB811AA742571 /* Pods-KireiShare.release.xcconfig */,
-				CA095AD8B940786852B75019 /* Pods-KireiShareTests.debug.xcconfig */,
-				813DBB9B05B4E2BFC249C86E /* Pods-KireiShareTests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -204,7 +198,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B050BC331B4B63AA00CCA6AC /* Build configuration list for PBXNativeTarget "KireiShareTests" */;
 			buildPhases = (
-				3C19E279DB5B4EA55562094A /* [CP] Check Pods Manifest.lock */,
 				B050BC221B4B63AA00CCA6AC /* Sources */,
 				B050BC231B4B63AA00CCA6AC /* Frameworks */,
 				B050BC241B4B63AA00CCA6AC /* Resources */,
@@ -281,24 +274,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		3C19E279DB5B4EA55562094A /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-KireiShareTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
 		494D2434C53D48EFA7AF988B /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -507,7 +482,6 @@
 		};
 		B050BC341B4B63AA00CCA6AC /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CA095AD8B940786852B75019 /* Pods-KireiShareTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -528,7 +502,6 @@
 		};
 		B050BC351B4B63AA00CCA6AC /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 813DBB9B05B4E2BFC249C86E /* Pods-KireiShareTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (

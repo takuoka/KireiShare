@@ -1,6 +1,0 @@
-framework module Pods_KireiShareTests {
-  umbrella header "Pods-KireiShareTests-umbrella.h"
-
-  export *
-  module * { export * }
-}
