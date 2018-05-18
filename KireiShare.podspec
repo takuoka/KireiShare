@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
     s.name         = "KireiShare"
-    s.version      = "0.0.1"
+    s.version      = "0.0.2"
     s.summary      = "Modal view for sharing action."
     s.homepage     = "https://github.com/entotsu/KireiShare"
     s.license      = "MIT"
